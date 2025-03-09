@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gia sư Toán</title>
+  <title>Nền tảng Gia sư</title>
   <style>
     /* RESET & CHUNG */
     * {
@@ -13,27 +13,126 @@
     }
     body {
       font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #fff;
+      background-color: #f9fafb;
       color: #1a1a1a;
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
+    
     /* HEADER */
     header {
       text-align: center;
-      padding: 20px;
+      padding: 16px 20px;
       border-bottom: 1px solid #eee;
       background-color: #fff;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      height: 64px;
     }
-    header h1 {
-      font-size: 2rem;
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo-container h1 {
+      font-size: 1.5rem;
       font-weight: 600;
       color: #2563eb;
     }
-    /* MAIN */
+    
+    .menu-toggle {
+      background: none;
+      border: none;
+      color: #2563eb;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+    }
+    
+    /* LEFT SIDEBAR */
+    .sidebar-left {
+      position: fixed;
+      top: 64px;
+      left: -280px;
+      width: 280px;
+      height: calc(100% - 64px);
+      background-color: #fff;
+      transition: left 0.3s ease;
+      z-index: 950;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      padding-top: 20px;
+    }
+    
+    .sidebar-left.open {
+      left: 0;
+    }
+    
+    .sidebar-left-title {
+      padding: 0 20px 15px;
+      color: #6b7280;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid #f3f4f6;
+      margin-bottom: 10px;
+    }
+    
+    .sidebar-menu {
+      list-style: none;
+    }
+    
+    .sidebar-menu-item {
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      color: #4b5563;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 6px;
+      margin: 4px 8px;
+    }
+    
+    .sidebar-menu-item:hover {
+      background-color: #f3f4f6;
+      color: #2563eb;
+    }
+    
+    .sidebar-menu-item.active {
+      background-color: #eff6ff;
+      color: #2563eb;
+      font-weight: 600;
+    }
+    
+    .sidebar-menu-item svg {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* MAIN CONTENT */
+    .content-container {
+      display: flex;
+      flex: 1;
+      margin-top: 64px;
+    }
+    
     main {
       flex: 1;
       max-width: 1000px;
@@ -42,7 +141,9 @@
       padding: 0 20px;
       display: flex;
       flex-direction: column;
+      transition: margin-left 0.3s ease;
     }
+    
     .welcome-section {
       background-color: #f3f4f6;
       border-radius: 12px;
@@ -50,10 +151,12 @@
       margin-bottom: 20px;
       border-left: 4px solid #2563eb;
     }
+    
     .welcome-section p {
       font-size: 1.1rem;
       margin-bottom: 10px;
     }
+    
     .chatbot-container {
       flex: 1;
       background-color: #fff;
@@ -61,7 +164,10 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       overflow: hidden;
       margin-bottom: 20px;
+      min-height: 600px;
+      display: flex;
     }
+    
     .chatbot-frame {
       border: none;
       width: 100%;
@@ -69,20 +175,12 @@
       margin: 0;
       flex: 1;
     }
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 15px;
-      border-top: 1px solid #eee;
-      font-size: 0.9rem;
-      background-color: #fff;
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
-    }
-    /* SIDEBAR chứa Google Form */
-    .sidebar {
+    
+    /* RIGHT SIDEBAR FOR FEEDBACK */
+    .sidebar-right {
       position: fixed;
       top: 0;
-      right: -400px; /* ẩn sidebar ngoài màn hình */
+      right: -400px;
       width: 400px;
       height: 100%;
       background-color: #fff;
@@ -94,9 +192,11 @@
       display: flex;
       flex-direction: column;
     }
-    .sidebar.open {
-      right: 0; /* hiển thị sidebar */
+    
+    .sidebar-right.open {
+      right: 0;
     }
+    
     .sidebar-header {
       display: flex;
       justify-content: space-between;
@@ -105,14 +205,17 @@
       background-color: #2563eb;
       color: #fff;
     }
+    
     .sidebar-header h2 {
       font-size: 1.5rem;
       font-weight: 500;
     }
+    
     .sidebar-content {
       flex: 1;
       padding: 0;
     }
+    
     .close-btn {
       cursor: pointer;
       font-size: 1.5rem;
@@ -120,11 +223,13 @@
       color: #fff;
       transition: color 0.2s;
     }
+    
     .close-btn:hover {
       color: #f3f4f6;
     }
-    /* NÚT GÓP Ý - đặt cố định ở góc dưới bên phải */
-    .toggle-btn {
+    
+    /* FEEDBACK BUTTON */
+    .feedback-btn {
       position: fixed;
       bottom: 20px;
       right: 20px;
@@ -141,73 +246,186 @@
       gap: 8px;
       transition: transform 0.2s, background-color 0.2s;
     }
-    .toggle-btn:hover {
+    
+    .feedback-btn:hover {
       transform: translateY(-2px);
       background-color: #1d4ed8;
     }
-    .toggle-btn svg {
+    
+    .feedback-btn svg {
       width: 16px;
       height: 16px;
     }
+    
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 15px;
+      border-top: 1px solid #eee;
+      font-size: 0.9rem;
+      background-color: #fff;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+    }
+    
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .sidebar {
+      .sidebar-right {
         width: 100%;
         right: -100%;
       }
-      .toggle-btn {
+      
+      .sidebar-left {
+        width: 260px;
+        left: -260px;
+      }
+      
+      .feedback-btn {
         padding: 10px 16px;
         font-size: 0.9rem;
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .welcome-section p {
+        font-size: 1rem;
+      }
+      
+      .logo-container h1 {
+        font-size: 1.3rem;
       }
     }
-    /* ANIMATION */
+    
+    /* For smaller mobile screens */
+    @media (max-width: 480px) {
+      .sidebar-left {
+        width: 240px;
+        left: -240px;
+      }
+      
+      .chatbot-container {
+        min-height: 500px;
+      }
+      
+      .chatbot-frame {
+        min-height: 500px;
+      }
+      
+      main {
+        padding: 0 12px;
+        margin: 15px auto;
+      }
+      
+      .logo-container h1 {
+        font-size: 1.2rem;
+      }
+    }
+    
+    /* ANIMATIONS */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+    
     .welcome-section {
       animation: fadeIn 0.6s ease-in-out;
+    }
+    
+    /* Overlay when mobile sidebar is open */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 949;
+    }
+    
+    .overlay.active {
+      display: block;
     }
   </style>
 </head>
 <body>
+  <!-- Overlay for mobile when sidebar is open -->
+  <div class="overlay" id="overlay"></div>
+  
   <!-- HEADER -->
   <header>
-    <h1>Gia sư Toán</h1>
-  </header>
-  
-  <!-- PHẦN CHÍNH -->
-  <main>
-    <div class="welcome-section">
-      <p>
-        Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng, hướng dẫn giải bài tập, cùng những mẹo học tập toán học hiệu quả.
-      </p>
-      <p>
-        Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học.
-      </p>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    
+    <div class="logo-container">
+      <h1>Nền tảng Gia sư</h1>
     </div>
     
-    <!-- IFRAME nhúng chatbot DIFY -->
-    <div class="chatbot-container">
-      <iframe 
-        class="chatbot-frame"
-        src="https://udify.app/chatbot/M1dEP0lGehU2sX7e" 
-        allow="microphone" 
-        scrolling="yes">
-      </iframe>
-    </div>
-  </main>
+    <div style="width: 24px;"></div> <!-- For balancing the header -->
+  </header>
   
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 Gia sư Toán. All rights reserved.</p>
-  </footer>
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar-left" id="sidebarLeft">
+    <div class="sidebar-left-title">Môn học</div>
+    <ul class="sidebar-menu">
+      <li class="sidebar-menu-item active" data-tutor="math">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+          <line x1="12" y1="8" x2="12" y2="16"></line>
+        </svg>
+        Gia sư Toán
+      </li>
+      <li class="sidebar-menu-item" data-tutor="english">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        Gia sư Anh
+      </li>
+      <li class="sidebar-menu-item" data-tutor="literature">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+        Gia sư Văn
+      </li>
+    </ul>
+  </div>
   
-  <!-- SIDEBAR chứa Google Form góp ý -->
-  <div class="sidebar" id="sidebar">
+  <!-- MAIN CONTENT -->
+  <div class="content-container">
+    <main>
+      <div class="welcome-section" id="welcomeSection">
+        <p>
+          Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng, hướng dẫn giải bài tập, cùng những mẹo học tập toán học hiệu quả.
+        </p>
+        <p>
+          Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học.
+        </p>
+      </div>
+      
+      <!-- IFRAME nhúng chatbot -->
+      <div class="chatbot-container">
+        <iframe 
+          id="chatbotFrame"
+          class="chatbot-frame"
+          src="https://udify.app/chatbot/M1dEP0lGehU2sX7e" 
+          allow="microphone" 
+          scrolling="yes">
+        </iframe>
+      </div>
+    </main>
+  </div>
+  
+  <!-- RIGHT SIDEBAR - FEEDBACK -->
+  <div class="sidebar-right" id="sidebarRight">
     <div class="sidebar-header">
       <h2>Góp ý của bạn</h2>
-      <span class="close-btn" onclick="toggleSidebar()">×</span>
+      <span class="close-btn" onclick="toggleFeedbackSidebar()">×</span>
     </div>
     <div class="sidebar-content">
       <!-- Nhúng Google Form -->
@@ -223,19 +441,114 @@
     </div>
   </div>
   
-  <!-- NÚT mở Sidebar "Góp ý" -->
-  <div class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">
+  <!-- FEEDBACK BUTTON -->
+  <div class="feedback-btn" id="feedbackBtn" onclick="toggleFeedbackSidebar()">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
     </svg>
     Góp ý
   </div>
   
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Nền tảng Gia sư. All rights reserved.</p>
+  </footer>
+  
   <script>
-    function toggleSidebar() {
-      var sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("open");
+    // Toggle Left Sidebar
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebarLeft = document.getElementById('sidebarLeft');
+    const overlay = document.getElementById('overlay');
+    
+    function toggleLeftSidebar() {
+      sidebarLeft.classList.toggle('open');
+      overlay.classList.toggle('active');
     }
+    
+    menuToggle.addEventListener('click', toggleLeftSidebar);
+    overlay.addEventListener('click', toggleLeftSidebar);
+    
+    // Toggle Right Sidebar (Feedback)
+    function toggleFeedbackSidebar() {
+      const sidebarRight = document.getElementById('sidebarRight');
+      sidebarRight.classList.toggle('open');
+    }
+    
+    // Handle sidebar menu items
+    const menuItems = document.querySelectorAll('.sidebar-menu-item');
+    const chatbotFrame = document.getElementById('chatbotFrame');
+    const welcomeSection = document.getElementById('welcomeSection');
+    
+    // Mapping of tutor types to their respective iframes
+    const tutorSources = {
+      'math': 'https://udify.app/chatbot/M1dEP0lGehU2sX7e',
+      'english': 'https://udify.app/chatbot/OLxmx5Fm8v6rTAXo',
+      'literature': 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7'
+    };
+    
+    // Mapping of tutor types to their welcome messages
+    const welcomeMessages = {
+      'math': `
+        <p>
+          Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng, hướng dẫn giải bài tập, cùng những mẹo học tập toán học hiệu quả.
+        </p>
+        <p>
+          Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học.
+        </p>
+      `,
+      'english': `
+        <p>
+          Chào mừng bạn đến với <strong>Gia sư Anh</strong>. Đây là nơi bạn có thể luyện tập kỹ năng ngôn ngữ, từ vựng, ngữ pháp và giao tiếp tiếng Anh.
+        </p>
+        <p>
+          Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ làm bài tập, luyện tập giao tiếp và cải thiện kỹ năng tiếng Anh của bạn.
+        </p>
+      `,
+      'literature': `
+        <p>
+          Chào mừng bạn đến với <strong>Gia sư Văn</strong>. Đây là nơi bạn có thể học cách phân tích văn bản, làm bài văn, và nâng cao kỹ năng viết của mình.
+        </p>
+        <p>
+          Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ phân tích tác phẩm, gợi ý cách làm bài văn và cải thiện kỹ năng viết của bạn.
+        </p>
+      `
+    };
+    
+    menuItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // Remove active class from all items
+        menuItems.forEach(i => i.classList.remove('active'));
+        
+        // Add active class to clicked item
+        this.classList.add('active');
+        
+        // Get tutor type
+        const tutorType = this.getAttribute('data-tutor');
+        
+        // Update iframe source
+        chatbotFrame.src = tutorSources[tutorType];
+        
+        // Update welcome message
+        welcomeSection.innerHTML = welcomeMessages[tutorType];
+        
+        // Close sidebar on mobile
+        if (window.innerWidth <= 768) {
+          toggleLeftSidebar();
+        }
+      });
+    });
+    
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function(event) {
+      if (window.innerWidth <= 768) {
+        const isClickInside = sidebarLeft.contains(event.target) || 
+                              menuToggle.contains(event.target);
+        
+        if (!isClickInside && sidebarLeft.classList.contains('open')) {
+          toggleLeftSidebar();
+        }
+      }
+    });
   </script>
 </body>
 </html>
