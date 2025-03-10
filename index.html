@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nền tảng Gia sư</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     /* RESET & CHUNG */
     * {
@@ -11,23 +15,67 @@
       padding: 0;
       box-sizing: border-box;
     }
+
+    :root {
+      --primary-color: #4f46e5;
+      --primary-dark: #4338ca;
+      --primary-light: #eef2ff;
+      --primary-gradient: linear-gradient(135deg, #4f46e5, #7c3aed);
+      --secondary-color: #10b981;
+      --secondary-gradient: linear-gradient(135deg, #10b981, #0ea5e9);
+      --accent-color: #f97316;
+      --text-primary: #111827;
+      --text-secondary: #4b5563;
+      --text-light: #9ca3af;
+      --bg-light: #f9fafb;
+      --bg-white: #ffffff;
+      --bg-dark: #111827;
+      --bg-card: #ffffff;
+      --overlay-bg: rgba(0, 0, 0, 0.5);
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --border-radius-sm: 0.375rem;
+      --border-radius-md: 0.5rem;
+      --border-radius-lg: 0.75rem;
+      --border-radius-xl: 1rem;
+      --transition-normal: all 0.3s ease;
+      --transition-fast: all 0.15s ease;
+      --font-family: 'Poppins', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
     body {
-      font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #f9fafb;
-      color: #1a1a1a;
-      line-height: 1.6;
+      font-family: var(--font-family);
+      background-color: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.7;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-size: 16px;
+      overflow-x: hidden;
     }
-    
+
+    /* DARK MODE */
+    body.dark-mode {
+      --primary-light: rgba(79, 70, 229, 0.15);
+      --text-primary: #f3f4f6;
+      --text-secondary: #d1d5db;
+      --text-light: #9ca3af;
+      --bg-light: #0f172a;
+      --bg-white: #1e293b;
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+    }
+
     /* HEADER */
     header {
-      text-align: center;
-      padding: 16px 20px;
-      border-bottom: 1px solid #eee;
-      background-color: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 0 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: var(--shadow-lg);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -36,399 +84,1007 @@
       left: 0;
       right: 0;
       z-index: 900;
-      height: 64px;
+      height: 70px;
+      backdrop-filter: blur(5px);
     }
-    
-    .logo-container {
+
+    .header-buttons {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
-    
-    .logo-container h1 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #2563eb;
-    }
-    
+
     .menu-toggle {
-      background: none;
-      border: none;
-      color: #2563eb;
-      font-size: 1.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 0.95rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 5px;
+      padding: 8px 16px;
+      border-radius: var(--border-radius-md);
+      transition: var(--transition-normal);
+      gap: 10px;
+      backdrop-filter: blur(5px);
     }
-    
+
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .theme-toggle {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--border-radius-md);
+      transition: var(--transition-normal);
+      backdrop-filter: blur(5px);
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Overlay khi mở sidebar */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--overlay-bg);
+      z-index: 900;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Auxiliary Tab và các elements liên quan đã được xóa bỏ vì đã tích hợp vào menu bên trái */
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-container h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.5px;
+      position: relative;
+    }
+
+    .logo-container h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 3px;
+    }
+
+    .subtitle {
+      font-size: 0.875rem;
+      opacity: 0.95;
+      font-weight: 300;
+      margin-top: 2px;
+    }
+
     /* LEFT SIDEBAR */
     .sidebar-left {
       position: fixed;
-      top: 64px;
-      left: -280px;
-      width: 280px;
-      height: calc(100% - 64px);
-      background-color: #fff;
-      transition: left 0.3s ease;
+      top: 70px;
+      left: -320px;
+      width: 320px;
+      height: calc(100% - 70px);
+      background-color: var(--bg-white);
+      transition: var(--transition-normal);
       z-index: 950;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow-xl);
       overflow-y: auto;
-      padding-top: 20px;
+      padding: 20px 0;
+      border-right: 1px solid rgba(229, 231, 235, 0.5);
     }
-    
+
     .sidebar-left.open {
       left: 0;
     }
-    
+
     .sidebar-left-title {
-      padding: 0 20px 15px;
-      color: #6b7280;
+      padding: 10px 24px 20px;
+      color: var(--text-secondary);
       font-size: 0.875rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-bottom: 1px solid #f3f4f6;
-      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(243, 244, 246, 0.5);
+      margin-bottom: 15px;
     }
-    
+
     .sidebar-menu {
       list-style: none;
+      margin: 0 12px;
     }
-    
+
     .sidebar-menu-item {
-      padding: 12px 20px;
+      padding: 14px 20px;
       cursor: pointer;
-      transition: background-color 0.2s;
-      color: #4b5563;
+      transition: var(--transition-normal);
+      color: var(--text-secondary);
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 12px;
-      border-radius: 6px;
-      margin: 4px 8px;
+      gap: 16px;
+      border-radius: var(--border-radius-md);
+      margin: 8px 0;
+      position: relative;
     }
-    
+
     .sidebar-menu-item:hover {
-      background-color: #f3f4f6;
-      color: #2563eb;
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      transform: translateX(5px);
     }
-    
+
+    .sidebar-menu-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      background-color: var(--primary-color);
+      border-radius: var(--border-radius-md);
+      opacity: 0.2;
+      transition: var(--transition-normal);
+    }
+
+    .sidebar-menu-item:hover::before {
+      width: 5px;
+    }
+
     .sidebar-menu-item.active {
-      background-color: #eff6ff;
-      color: #2563eb;
+      background-color: var(--primary-light);
+      color: var(--primary-color);
       font-weight: 600;
     }
-    
-    .sidebar-menu-item svg {
-      width: 20px;
-      height: 20px;
+
+    .sidebar-menu-item.active::before {
+      width: 5px;
     }
-    
+
+    .sidebar-menu-item svg,
+    .sidebar-menu-item .emoji-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background-color: rgba(229, 231, 235, 0.5);
+      margin: 15px 20px;
+      list-style: none;
+    }
+
+    /* Dropdown Menu Styles */
+    .sidebar-dropdown-item {
+      justify-content: space-between;
+    }
+
+    .dropdown-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-dropdown-item.active .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .sidebar-dropdown-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 15px;
+    }
+
+    .sidebar-dropdown-menu.open {
+      max-height: 500px;
+    }
+
+    .dropdown-menu-item {
+      padding-left: 25px;
+      transition: all 0.2s ease;
+    }
+
+    .emoji-icon {
+      font-size: 20px;
+      text-align: center;
+      line-height: 24px;
+    }
+
     /* MAIN CONTENT */
     .content-container {
       display: flex;
       flex: 1;
-      margin-top: 64px;
+      margin-top: 70px;
+      padding-top: 30px;
     }
-    
+
+    @media (min-width: 1200px) {
+      .sidebar-left {
+        left: 0;
+      }
+
+      .content-container {
+        margin-left: 320px;
+        width: calc(100% - 320px);
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .overlay.active {
+        display: none;
+      }
+    }
+
     main {
       flex: 1;
-      max-width: 1000px;
+      max-width: 1200px;
       width: 100%;
-      margin: 20px auto;
-      padding: 0 20px;
+      margin: 0 auto;
+      padding: 0 30px 50px;
       display: flex;
       flex-direction: column;
-      transition: margin-left 0.3s ease;
     }
-    
+
     .welcome-section {
-      background-color: #f3f4f6;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-left: 4px solid #2563eb;
+      background-color: var(--bg-card);
+      border-radius: var(--border-radius-xl);
+      padding: 30px;
+      margin-bottom: 35px;
+      border-left: 5px solid var(--primary-color);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
     }
-    
+
+    .welcome-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 150px;
+      height: 150px;
+      background: var(--primary-gradient);
+      opacity: 0.05;
+      border-radius: 0 0 0 100%;
+    }
+
+    .welcome-section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      position: relative;
+      display: inline-block;
+    }
+
+    .welcome-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary-gradient);
+      border-radius: 3px;
+    }
+
     .welcome-section p {
       font-size: 1.1rem;
+      margin-bottom: 18px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .welcome-section h3 {
+      font-size: 1.3rem;
+      margin-top: 20px;
       margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .welcome-section ul {
+      margin-bottom: 18px;
+      margin-left: 25px;
+      color: var(--text-secondary);
+    }
+
+    .welcome-section li {
+      margin-bottom: 8px;
     }
     
+    .collapsible-title {
+      cursor: pointer;
+      position: relative;
+      padding-right: 30px;
+      transition: color 0.3s;
+    }
+    
+    /* Removed plus/minus symbols */
+    .collapsible-title {
+      padding-right: 10px; /* Maintain some padding on the right */
+    }
+    
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+    
+    .collapsible-content.show {
+      max-height: 1000px;
+      opacity: 1;
+    }
+
+    .welcome-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .welcome-section strong {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
     .chatbot-container {
       flex: 1;
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      background-color: var(--bg-card);
+      border-radius: var(--border-radius-xl);
+      box-shadow: var(--shadow-lg);
       overflow: hidden;
-      margin-bottom: 20px;
-      min-height: 600px;
+      margin-bottom: 35px;
+      min-height: 700px;
       display: flex;
+      border: 1px solid rgba(229, 231, 235, 0.3);
+      position: relative;
     }
-    
+
+    .chatbot-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--primary-gradient);
+    }
+
     .chatbot-frame {
       border: none;
       width: 100%;
-      min-height: 600px;
+      min-height: 700px;
       margin: 0;
       flex: 1;
     }
-    
-    /* RIGHT SIDEBAR FOR FEEDBACK */
+
+    /* QUICK SUGGESTION BUTTONS */
+    .quick-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 35px;
+      animation: slideInRight 0.7s ease-out;
+    }
+
+    .suggestion-btn {
+      background-color: var(--bg-card);
+      color: var(--primary-color);
+      border: 1px solid rgba(79, 70, 229, 0.3);
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-normal);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .suggestion-btn:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .suggestion-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .suggestion-btn svg,
+    .suggestion-btn .emoji {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .suggestion-btn .emoji {
+      font-size: 18px;
+    }
+
+    /* RIGHT SIDEBAR - FEEDBACK */
     .sidebar-right {
       position: fixed;
       top: 0;
-      right: -400px;
-      width: 400px;
+      right: -450px;
+      width: 450px;
       height: 100%;
-      background-color: #fff;
-      box-shadow: -4px 0 12px rgba(0,0,0,0.1);
-      transition: right 0.3s ease;
+      background-color: var(--bg-white);
+      box-shadow: var(--shadow-xl);
+      transition: var(--transition-normal);
       z-index: 999;
       padding: 0;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
+      border-left: 1px solid rgba(229, 231, 235, 0.3);
     }
-    
+
     .sidebar-right.open {
       right: 0;
     }
-    
+
     .sidebar-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
-      background-color: #2563eb;
-      color: #fff;
+      padding: 22px 24px;
+      background: var(--primary-gradient);
+      color: white;
     }
-    
+
     .sidebar-header h2 {
       font-size: 1.5rem;
       font-weight: 500;
     }
-    
+
     .sidebar-content {
       flex: 1;
       padding: 0;
     }
-    
+
     .close-btn {
       cursor: pointer;
       font-size: 1.5rem;
       font-weight: bold;
-      color: #fff;
-      transition: color 0.2s;
+      color: white;
+      transition: var(--transition-fast);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius-md);
+      backdrop-filter: blur(5px);
     }
-    
+
     .close-btn:hover {
-      color: #f3f4f6;
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: rotate(90deg);
     }
-    
+
     /* FEEDBACK BUTTON */
     .feedback-btn {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #2563eb;
-      color: #fff;
-      padding: 12px 20px;
+      bottom: 30px;
+      right: 30px;
+      background: var(--primary-gradient);
+      color: white;
+      padding: 14px 28px;
       border-radius: 50px;
       cursor: pointer;
       z-index: 1000;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      box-shadow: var(--shadow-xl);
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 8px;
-      transition: transform 0.2s, background-color 0.2s;
+      gap: 12px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: none;
     }
-    
+
+    .feedback-btn::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: var(--primary-gradient);
+      border-radius: 50px;
+      z-index: -1;
+      opacity: 0.4;
+      transition: var(--transition-normal);
+    }
+
     .feedback-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.5);
+    }
+
+    .feedback-btn:hover::before {
+      opacity: 0.6;
+      inset: -5px;
+    }
+
+    .feedback-btn:active {
       transform: translateY(-2px);
-      background-color: #1d4ed8;
     }
-    
+
     .feedback-btn svg {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
     }
-    
+
     /* FOOTER */
     footer {
       text-align: center;
-      padding: 15px;
-      border-top: 1px solid #eee;
-      font-size: 0.9rem;
-      background-color: #fff;
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+      padding: 35px 24px;
+      border-top: 1px solid rgba(229, 231, 235, 0.3);
+      font-size: 0.95rem;
+      background-color: var(--bg-white);
+      box-shadow: var(--shadow-lg);
+      margin-top: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 25px;
+    }
+
+    .footer-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition-normal);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: var(--transition-normal);
+      border-radius: 2px;
+    }
+
+    .footer-link:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: var(--bg-light);
+      color: var(--text-secondary);
+      border-radius: 50%;
+      transition: var(--transition-normal);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .social-link:hover {
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      transform: translateY(-3px) rotate(8deg);
+      box-shadow: var(--shadow-md);
     }
     
+    .discord-icon {
+      position: relative;
+      overflow: visible;
+    }
+    
+    .discord-icon svg {
+      filter: drop-shadow(0 0 2px #8a70ff);
+      color: #8a70ff;
+    }
+    
+    .discord-icon:hover svg {
+      filter: drop-shadow(0 0 4px #8a70ff);
+      color: #a391ff;
+    }
+
+    .copyright {
+      color: var(--text-light);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .sidebar-right {
         width: 100%;
         right: -100%;
       }
-      
+
+      header {
+        padding: 0 16px;
+        height: 65px;
+      }
+
+      .logo-container h1 {
+        font-size: 1.3rem;
+      }
+
+      .sidebar-left {
+        top: 65px;
+        width: 280px;
+        height: calc(100% - 65px);
+        left: -280px;
+      }
+
+      .content-container {
+        margin-top: 65px;
+        padding-top: 20px;
+      }
+
+      main {
+        padding: 0 20px 40px;
+      }
+
+      .welcome-section {
+        padding: 25px;
+        margin-bottom: 25px;
+      }
+
+      .welcome-section p {
+        font-size: 1rem;
+      }
+
+      .feedback-btn {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        right: 20px;
+        bottom: 20px;
+      }
+
+      .chatbot-container, .chatbot-frame {
+        min-height: 550px;
+      }
+
+      .aux-tab button {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
       .sidebar-left {
         width: 260px;
         left: -260px;
       }
-      
-      .feedback-btn {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-        bottom: 15px;
-        right: 15px;
-      }
-      
-      .welcome-section p {
-        font-size: 1rem;
-      }
-      
-      .logo-container h1 {
-        font-size: 1.3rem;
-      }
-    }
-    
-    /* For smaller mobile screens */
-    @media (max-width: 480px) {
-      .sidebar-left {
-        width: 240px;
-        left: -240px;
-      }
-      
-      .chatbot-container {
+
+      .chatbot-container, .chatbot-frame {
         min-height: 500px;
       }
-      
-      .chatbot-frame {
-        min-height: 500px;
-      }
-      
+
       main {
-        padding: 0 12px;
-        margin: 15px auto;
+        padding: 0 16px 30px;
       }
-      
+
       .logo-container h1 {
         font-size: 1.2rem;
       }
+
+      .subtitle {
+        display: none;
+      }
+
+      .welcome-section {
+        padding: 20px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .help-modal-header {
+        padding: 8px;
+      }
+      .help-modal-body {
+        padding: 15px;
+        font-size: 14px;
+      }
     }
-    
+
     /* ANIMATIONS */
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
     .welcome-section {
-      animation: fadeIn 0.6s ease-in-out;
+      animation: fadeIn 0.6s ease-out;
     }
-    
-    /* Overlay when mobile sidebar is open */
-    .overlay {
+
+    .chatbot-container {
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    /* Modal Popup cho Footer Links */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: var(--bg-white);
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      border-radius: var(--border-radius-md);
+      position: relative;
+    }
+
+    .modal-close {
+      color: #aaa;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .modal-close:hover {
+      color: #000;
+    }
+
+    /* Full-screen Modal cho Trợ giúp */
+    .full-modal {
+      display: none;
+      position: fixed;
+      z-index: 11000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+    }
+    .help-modal-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-white);
+    }
+    .help-modal-header {
+      background: var(--primary-gradient);
+      padding: 10px;
+      text-align: right;
+    }
+    .help-modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+    .help-modal-body {
+      padding: 20px;
+      height: calc(100% - 50px);
+      overflow-y: auto;
+    }
+
+    /* Auxiliary Menu Button đã được xóa bỏ */
+
+    #welcomePopup {
+      display: block; /* Initially show the popup */
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 949;
+      z-index: 10000;
     }
-    
-    .overlay.active {
-      display: block;
+
+    #welcomePopup .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 400px;
     }
+
+    #welcomePopup .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+    }
+
   </style>
 </head>
 <body>
-  <!-- Overlay for mobile when sidebar is open -->
-  <div class="overlay" id="overlay"></div>
-  
+  <div id="welcomePopup">
+    <div class="modal-content">
+      <span class="modal-close" onclick="document.getElementById('welcomePopup').style.display='none';">&times;</span>
+      <h2>Chào mừng đến với Nền tảng Gia sư!</h2>
+      <p>Nhấn vào 'Môn học' để chọn môn, dùng chatbot để hỏi bài nhé!</p>
+    </div>
+  </div>
   <!-- HEADER -->
   <header>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
-    
-    <div class="logo-container">
-      <h1>Nền tảng Gia sư</h1>
+    <div class="header-buttons">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span>Môn học</span>
+      </button>
     </div>
-    
-    <div style="width: 24px;"></div> <!-- For balancing the header -->
+
+    <div class="logo-container">
+      <h1>Nền tảng Gia sư<div class="subtitle">Học mọi lúc, mọi nơi</div></h1>
+    </div>
   </header>
-  
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Removed Auxiliary Tab as it's now integrated into the sidebar menu -->
+
   <!-- LEFT SIDEBAR -->
   <div class="sidebar-left" id="sidebarLeft">
-    <div class="sidebar-left-title">Môn học</div>
+    <div class="sidebar-left-title">Chọn môn học</div>
     <ul class="sidebar-menu">
       <li class="sidebar-menu-item active" data-tutor="math">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="8" y1="12" x2="16" y2="12"></line>
-          <line x1="12" y1="8" x2="12" y2="16"></line>
-        </svg>
+        <div class="emoji-icon">📐</div>
         Gia sư Toán
       </li>
       <li class="sidebar-menu-item" data-tutor="english">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-        </svg>
+        <div class="emoji-icon">🇬🇧</div>
         Gia sư Anh
       </li>
       <li class="sidebar-menu-item" data-tutor="literature">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-        </svg>
+        <div class="emoji-icon">📖</div>
         Gia sư Văn
       </li>
+
+      <li class="sidebar-divider"></li>
+
+      <!-- Tùy chọn trong menu -->
+      <li class="sidebar-menu-item sidebar-dropdown-item" tabindex="0" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        Tùy chọn
+        <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </li>
+      <div class="sidebar-dropdown-menu">
+        <li class="sidebar-menu-item dropdown-menu-item" id="menuHelpBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          Trợ giúp
+        </li>
+        <li class="sidebar-menu-item dropdown-menu-item" id="menuThemeToggleBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          Giao diện tối/sáng
+        </li>
+        <li class="sidebar-menu-item dropdown-menu-item" id="menuFeedbackBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Góp ý
+        </li>
+      </div>
     </ul>
   </div>
-  
+
   <!-- MAIN CONTENT -->
   <div class="content-container">
     <main>
       <div class="welcome-section" id="welcomeSection">
-        <p>
-          Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng, hướng dẫn giải bài tập, cùng những mẹo học tập toán học hiệu quả.
-        </p>
-        <p>
-          Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học.
-        </p>
+        <h2 class="collapsible-title">Gia sư Toán</h2>
+        <div class="collapsible-content">
+          <p>
+            Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể nhận sự trợ giúp của AI ' Gia sư toán'. Gia sư toán sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.
+          </p>
+          <p>
+            Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học phức tạp. Trợ lý của chúng tôi có thể hỗ trợ từ toán cơ bản đến nâng cao.
+          </p>
+          <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>
+        </div>
       </div>
-      
-      <!-- IFRAME nhúng chatbot -->
+
       <div class="chatbot-container">
         <iframe 
           id="chatbotFrame"
           class="chatbot-frame"
-          src="https://udify.app/chatbot/M1dEP0lGehU2sX7e" 
-          allow="microphone" 
-          scrolling="yes">
+          src="https://udify.app/chatbot/M1dEP0lGehU2sX7e"
+          allow="microphone"
+          scrolling="yes"
+          loading="lazy">
         </iframe>
       </div>
     </main>
   </div>
-  
+
   <!-- RIGHT SIDEBAR - FEEDBACK -->
   <div class="sidebar-right" id="sidebarRight">
     <div class="sidebar-header">
       <h2>Góp ý của bạn</h2>
-      <span class="close-btn" onclick="toggleFeedbackSidebar()">×</span>
+      <button class="close-btn" onclick="toggleFeedbackSidebar()">×</button>
     </div>
     <div class="sidebar-content">
-      <!-- Nhúng Google Form -->
       <iframe 
         src="https://docs.google.com/forms/d/e/1FAIpQLSfP8p-6TarFlG8EHTYOXcfYbKObW7khCbtv9JNcUO8RWm3RLA/viewform?embedded=true" 
         width="100%" 
@@ -440,113 +1096,348 @@
       </iframe>
     </div>
   </div>
-  
-  <!-- FEEDBACK BUTTON -->
-  <div class="feedback-btn" id="feedbackBtn" onclick="toggleFeedbackSidebar()">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-    </svg>
-    Góp ý
-  </div>
-  
+
+
+
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Nền tảng Gia sư. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#" class="footer-link">Giới thiệu</a>
+      <a href="#" class="footer-link">Chính sách riêng tư</a>
+      <a href="#" class="footer-link">Điều khoản sử dụng</a>
+      <a href="#" class="footer-link">Liên hệ</a>
+    </div>
+
+    <div class="social-links">
+      <a href="https://discord.gg/RTj8QcBQ" class="social-link discord-icon" aria-label="Discord" target="_blank">
+        <i class='fab fa-discord'></i>
+      </a>
+      <a href="mailto:legiahuyltv@gmail.com" class="social-link" aria-label="Email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="copyright">&copy; 2025 Nền tảng Gia sư. All rights reserved.</div>
   </footer>
-  
+
+  <!-- Modal Popup cho Footer Links -->
+  <div id="footerModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="modalText"></div>
+    </div>
+  </div>
+
+  <!-- Full-screen Modal cho Trợ giúp -->
+  <div id="helpModal" class="full-modal">
+    <div class="help-modal-content">
+      <div class="help-modal-header">
+        <button class="help-modal-close" aria-label="Đóng trợ giúp">&times;</button>
+      </div>
+      <div class="help-modal-body">
+        <h2>Trợ giúp</h2>
+        <p><strong>Cách sử dụng Gia sư Toán</strong></p>
+        <p>1. Chọn 'Gia sư Toán' trong menu.</p>
+        <p>2. Gõ câu hỏi vào chatbot (ví dụ: 'Giải phương trình x^2 = 4').</p>
+        <p>3. Thử hỏi các câu hỏi khác trong chatbot!</p>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Function to toggle collapsible content open on initial load
+    window.onload = function() {
+      const collapsibleTitle = document.querySelector('.collapsible-title');
+      const collapsibleContent = document.querySelector('.collapsible-content');
+      
+      if (collapsibleTitle && collapsibleContent) {
+        collapsibleTitle.classList.add('active');
+        collapsibleContent.classList.add('show');
+      }
+    };
+    
     // Toggle Left Sidebar
     const menuToggle = document.getElementById('menuToggle');
     const sidebarLeft = document.getElementById('sidebarLeft');
     const overlay = document.getElementById('overlay');
-    
+
     function toggleLeftSidebar() {
-      sidebarLeft.classList.toggle('open');
-      overlay.classList.toggle('active');
+      if(sidebarLeft) sidebarLeft.classList.toggle('open');
+      if(overlay) overlay.classList.toggle('active');
     }
-    
-    menuToggle.addEventListener('click', toggleLeftSidebar);
-    overlay.addEventListener('click', toggleLeftSidebar);
-    
-    // Toggle Right Sidebar (Feedback)
+
+    if(menuToggle) menuToggle.addEventListener('click', toggleLeftSidebar);
+    if(overlay) overlay.addEventListener('click', toggleLeftSidebar);
+
+    // Hàm toggle Sidebar Feedback (Góp ý)
     function toggleFeedbackSidebar() {
       const sidebarRight = document.getElementById('sidebarRight');
-      sidebarRight.classList.toggle('open');
+      if (sidebarRight) {
+        sidebarRight.classList.toggle('open');
+        if (sidebarRight.classList.contains('open')) {
+          overlay.classList.add('active');
+        } else {
+          overlay.classList.remove('active');
+        }
+      }
+    }
+
+    // Tutor mapping để chuyển đổi nội dung khi chọn các môn học (Toán, Anh, Văn)
+    // Function to handle collapsible sections
+    function setupCollapsible() {
+      const collapsibles = document.querySelectorAll('.collapsible-title');
+      
+      collapsibles.forEach(item => {
+        item.addEventListener('click', function() {
+          this.classList.toggle('active');
+          const content = this.nextElementSibling;
+          
+          if (content.classList.contains('show')) {
+            content.classList.remove('show');
+          } else {
+            content.classList.add('show');
+          }
+        });
+      });
     }
     
-    // Handle sidebar menu items
-    const menuItems = document.querySelectorAll('.sidebar-menu-item');
-    const chatbotFrame = document.getElementById('chatbotFrame');
-    const welcomeSection = document.getElementById('welcomeSection');
-    
-    // Mapping of tutor types to their respective iframes
-    const tutorSources = {
-      'math': 'https://udify.app/chatbot/M1dEP0lGehU2sX7e',
-      'english': 'https://udify.app/chatbot/OLxmx5Fm8v6rTAXo',
-      'literature': 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7'
-    };
-    
-    // Mapping of tutor types to their welcome messages
-    const welcomeMessages = {
-      'math': `
-        <p>
-          Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng, hướng dẫn giải bài tập, cùng những mẹo học tập toán học hiệu quả.
-        </p>
-        <p>
-          Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học.
-        </p>
-      `,
-      'english': `
-        <p>
-          Chào mừng bạn đến với <strong>Gia sư Anh</strong>. Đây là nơi bạn có thể luyện tập kỹ năng ngôn ngữ, từ vựng, ngữ pháp và giao tiếp tiếng Anh.
-        </p>
-        <p>
-          Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ làm bài tập, luyện tập giao tiếp và cải thiện kỹ năng tiếng Anh của bạn.
-        </p>
-      `,
-      'literature': `
-        <p>
-          Chào mừng bạn đến với <strong>Gia sư Văn</strong>. Đây là nơi bạn có thể học cách phân tích văn bản, làm bài văn, và nâng cao kỹ năng viết của mình.
-        </p>
-        <p>
-          Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ phân tích tác phẩm, gợi ý cách làm bài văn và cải thiện kỹ năng viết của bạn.
-        </p>
-      `
-    };
-    
-    menuItems.forEach(item => {
-      item.addEventListener('click', function() {
-        // Remove active class from all items
-        menuItems.forEach(i => i.classList.remove('active'));
-        
-        // Add active class to clicked item
-        this.classList.add('active');
-        
-        // Get tutor type
-        const tutorType = this.getAttribute('data-tutor');
-        
-        // Update iframe source
-        chatbotFrame.src = tutorSources[tutorType];
-        
-        // Update welcome message
-        welcomeSection.innerHTML = welcomeMessages[tutorType];
-        
-        // Close sidebar on mobile
-        if (window.innerWidth <= 768) {
-          toggleLeftSidebar();
+    document.addEventListener("DOMContentLoaded", function() {
+      // Setup collapsible sections on page load
+      setupCollapsible();
+      
+      // Xử lý dropdown menu
+      const dropdownItem = document.querySelector('.sidebar-dropdown-item');
+      const dropdownMenu = document.querySelector('.sidebar-dropdown-menu');
+
+      if (dropdownItem && dropdownMenu) {
+        dropdownItem.addEventListener('click', function() {
+          dropdownItem.classList.toggle('active');
+          dropdownMenu.classList.toggle('open');
+        });
+      }
+
+      const menuItems = document.querySelectorAll('.sidebar-menu-item:not(.sidebar-dropdown-item):not(.dropdown-menu-item)');
+      const chatbotFrame = document.getElementById('chatbotFrame');
+      const welcomeSection = document.getElementById('welcomeSection');
+
+      const tutorMapping = {
+        math: {
+          title: 'Gia sư Toán',
+          description: 'Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng chất lượng cao, hướng dẫn giải bài tập chi tiết, cùng những mẹo học tập toán học hiệu quả từ các chuyên gia hàng đầu.',
+          iframe: 'https://udify.app/chatbot/M1dEP0lGehU2sX7e'
+        },
+        english: {
+          title: 'Gia sư Anh',
+          description: 'Chào mừng bạn đến với <strong>Gia sư Anh</strong>. Tại đây, bạn có thể học tiếng Anh qua các bài giảng và tương tác với trợ lý AI.',
+          iframe: 'https://udify.app/chatbot/OLxmx5Fm8v6rTAXo'
+        },
+        literature: {
+          title: 'Gia sư Văn',
+          description: 'Chào mừng bạn đến với <strong>Gia sư Văn</strong>. Đây là nơi chia sẻ kiến thức và các bài giảng về Ngữ Văn.',
+          iframe: 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7'
         }
+      };
+
+      menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+          menuItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+
+          const tutor = item.getAttribute('data-tutor');
+          const selectedTutor = tutorMapping[tutor];
+
+          if (selectedTutor) {
+            welcomeSection.innerHTML = `
+              <h2 class="collapsible-title">${selectedTutor.title}</h2>
+              <div class="collapsible-content">
+                <p>${selectedTutor.description}</p>
+                <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>
+              </div>
+            `;
+            setupCollapsible();
+            chatbotFrame.src = selectedTutor.iframe;
+          }
+        });
       });
     });
-    
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function(event) {
-      if (window.innerWidth <= 768) {
-        const isClickInside = sidebarLeft.contains(event.target) || 
-                              menuToggle.contains(event.target);
-        
-        if (!isClickInside && sidebarLeft.classList.contains('open')) {
-          toggleLeftSidebar();
+
+    // Xử lý các chức năng menu trong sidebar
+    document.addEventListener("DOMContentLoaded", function() {
+      const helpModal = document.getElementById('helpModal');
+
+      // Menu tùy chọn bên sidebar
+      const menuHelpBtn = document.getElementById('menuHelpBtn');
+      const menuThemeToggleBtn = document.getElementById('menuThemeToggleBtn');
+      const menuFeedbackBtn = document.getElementById('menuFeedbackBtn');
+
+      // Xử lý nút trợ giúp trong menu
+      if (menuHelpBtn) {
+        menuHelpBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          if(helpModal) helpModal.style.display = "block";
+          // Đóng sidebar menu trên mobile nếu đang mở
+          if (window.innerWidth < 1200) {
+            sidebarLeft.classList.remove('open');
+            overlay.classList.remove('active');
+          }
+        });
+      }
+
+      // Xử lý nút giao diện trong menu
+      if (menuThemeToggleBtn) {
+        menuThemeToggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.body.classList.toggle('dark-mode');
+          // Đóng sidebar menu trên mobile nếu đang mở
+          if (window.innerWidth < 1200) {
+            sidebarLeft.classList.remove('open');
+            overlay.classList.remove('active');
+          }
+        });
+      }
+
+      // Xử lý nút góp ý trong menu
+      if (menuFeedbackBtn) {
+        menuFeedbackBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          toggleFeedbackSidebar();
+          // Đóng sidebar menu trên mobile nếu đang mở
+          if (window.innerWidth < 1200) {
+            sidebarLeft.classList.remove('open');
+            overlay.classList.remove('active');
+          }
+        });
+      }
+
+      // Update iframe source in Feedback sidebar
+      const sidebarRightIframe = document.querySelector('.sidebar-content iframe');
+      if (sidebarRightIframe) {
+        sidebarRightIframe.src = "https://docs.google.com/forms/d/e/1FAIpQLSfP8p-6TarFlG8EHTYOXcfYbKObW7khCbtv9JNcUO8RWm3RLA/viewform?embedded=true";
+      }
+    });
+
+    // Xử lý Modal cho Footer Links
+    document.addEventListener("DOMContentLoaded", function() {
+      const footerLinks = document.querySelectorAll('.footer-link');
+      const footerModal = document.getElementById('footerModal');
+      const modalText = document.getElementById('modalText');
+      const modalClose = document.querySelector('#footerModal .modal-close');
+
+      const modalContentMapping = {
+        "Giới thiệu": `<strong>Giới thiệu</strong><br>
+Gia sư Ảo là nền tảng học trực tuyến chuyên biệt về toán học, ngữ văn, anh văn. Hướng dẫn giải bài tập chi tiết và những mẹo học tập hiệu quả. Chúng tôi cam kết mang đến trải nghiệm học tập toàn diện, từ kiến thức cơ bản đến nâng cao, phù hợp với mọi đối tượng học sinh.`,
+        "Liên hệ": `<strong>Liên hệ</strong><br>
+Gmail: <a href="mailto:legiahuyltv@gmail.com">legiahuyltv@gmail.com</a>`,
+        "Trợ giúp": `<strong>Trợ giúp</strong><br>`,
+        "Chính sách riêng tư": `<strong>Chính sách riêng tư</strong><br>
+Chúng tôi tôn trọng và bảo vệ quyền riêng tư của người dùng. Thông tin cá nhân của bạn được bảo mật và chỉ được sử dụng để cải thiện trải nghiệm học tập. Chúng tôi không chia sẻ dữ liệu cá nhân với bên thứ ba khi chưa có sự đồng ý. Mọi dữ liệu học tập và tiến trình của bạn được lưu trữ an toàn và chỉ bạn cùng giáo viên hướng dẫn mới có quyền truy cập.`,
+        "Điều khoản sử dụng": `<strong>Điều khoản sử dụng</strong><br>
+1. Chấp nhận điều khoản<br>
+Bằng việc truy cập và sử dụng chatbot Gia sư Toán ("Chatbot"), bạn đồng ý tuân thủ và bị ràng buộc bởi tất cả các điều khoản và điều kiện được nêu trong văn bản này. Nếu bạn không đồng ý với bất kỳ phần nào của các điều khoản này, vui lòng không sử dụng Chatbot.<br>
+2. Điều kiện sử dụng<br><br>
+Chatbot Gia sư Toán được thiết kế để hỗ trợ học tập, giải đáp thắc mắc và cung cấp tài liệu liên quan đến toán học.<br>
+Chatbot chỉ cung cấp thông tin tham khảo và không thay thế cho việc học tập chính thức hoặc tư vấn từ giáo viên có trình độ.<br>
+Người dùng phải từ 13 tuổi trở lên hoặc có sự giám sát của phụ huynh/người giám hộ khi sử dụng Chatbot.<br><br>
+3. Quyền sở hữu trí tuệ<br><br>
+Tất cả nội dung được cung cấp thông qua Chatbot, bao gồm nhưng không giới hạn ở văn bản, hình ảnh, logo, bài giảng, và giải pháp bài tập, đều thuộc quyền sở hữu của Gia sư Toán hoặc các đối tác cấp phép.<br>
+Người dùng được cấp quyền sử dụng nội dung chỉ cho mục đích học tập cá nhân và không được sao chép, phân phối, sửa đổi, hiển thị công khai hoặc tạo các sản phẩm phái sinh mà không có sự cho phép bằng văn bản.<br><br>
+4. Quy tắc ứng xử<br>
+Khi tương tác với Chatbot, người dùng không được:<br>
+- Gửi nội dung khiêu dâm, phỉ báng, đe dọa, quấy rối hoặc xúc phạm.<br>
+- Cố gắng lừa đảo, khai thác lỗ hổng hoặc can thiệp vào hoạt động bình thường của Chatbot.<br>
+- Sử dụng Chatbot để thực hiện gian lận học thuật hoặc vi phạm quy định của nhà trường.<br>
+- Tải lên hoặc truyền bất kỳ loại virus, mã độc hoặc phần mềm có hại nào.<br>
+- Thu thập thông tin người dùng khác hoặc nội dung của Chatbot thông qua các phương tiện tự động.<br><br>
+5. Bảo mật và dữ liệu cá nhân<br><br>
+Chúng tôi thu thập và xử lý thông tin cá nhân theo Chính sách riêng tư của chúng tôi.<br>
+Các cuộc hội thoại với Chatbot có thể được lưu trữ để cải thiện dịch vụ và đào tạo mô hình AI.<br>
+Chúng tôi áp dụng các biện pháp bảo mật hợp lý nhưng không thể đảm bảo an toàn tuyệt đối cho thông tin được truyền qua internet.<br><br>
+6. Giới hạn trách nhiệm<br><br>
+Chatbot được cung cấp "nguyên trạng" và "như có sẵn" mà không có bất kỳ bảo đảm nào.<br>
+Chúng tôi không chịu trách nhiệm về bất kỳ thiệt hại trực tiếp, gián tiếp, ngẫu nhiên, đặc biệt hoặc hậu quả nào phát sinh từ việc sử dụng hoặc không thể sử dụng Chatbot.<br>
+Chúng tôi không đảm bảo tính chính xác, đầy đủ hoặc hữu ích của thông tin do Chatbot cung cấp.<br><br>
+7. Thay đổi trong dịch vụ<br><br>
+Chúng tôi có quyền sửa đổi, tạm ngừng hoặc ngừng cung cấp Chatbot mà không cần thông báo trước.<br>
+Chúng tôi có thể cập nhật nội dung, tính năng hoặc giao diện của Chatbot bất cứ lúc nào.<br><br>
+8. Thay đổi điều khoản<br><br>
+Chúng tôi có quyền sửa đổi các điều khoản này vào bất kỳ lúc nào.<br>
+Những thay đổi sẽ có hiệu lực ngay sau khi được đăng trên nền tảng Gia sư Toán.<br>
+Việc tiếp tục sử dụng Chatbot sau khi thay đổi điều khoản được xem là chấp nhận các điều khoản mới.<br><br>
+9. Chấm dứt sử dụng<br><br>
+Chúng tôi có quyền chấm dứt hoặc hạn chế quyền truy cập của người dùng vào Chatbot nếu vi phạm các điều khoản này.<br>
+Người dùng có thể ngừng sử dụng Chatbot bất cứ lúc nào.<br><br>
+10. Luật áp dụng<br><br>
+Các điều khoản này được điều chỉnh và giải thích theo luật pháp Việt Nam.<br>
+Bất kỳ tranh chấp nào phát sinh từ việc sử dụng Chatbot sẽ được giải quyết thông qua thương lượng hoặc tại tòa án có thẩm quyền tại Việt Nam.<br><br>
+11. Phản hồi và báo cáo lạm dụng<br><br>
+Người dùng được khuyến khích báo cáo nội dung không phù hợp hoặc lạm dụng Chatbot.<br>
+Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đánh giá cao.`
+      };
+
+      footerLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const key = link.textContent.trim();
+          const content = modalContentMapping[key] || "Nội dung không khả dụng.";
+          modalText.innerHTML = content;
+          footerModal.style.display = "block";
+        });
+      });
+
+      if (modalClose) {
+        modalClose.addEventListener('click', function() {
+          footerModal.style.display = "none";
+        });
+      }
+
+      window.addEventListener('click', function(e) {
+        if (e.target == footerModal) {
+          footerModal.style.display = "none";
         }
+      });
+      
+      // Ensure all modal close buttons work
+      document.querySelectorAll('.modal-close').forEach(closeBtn => {
+        closeBtn.addEventListener('click', function() {
+          const modal = this.closest('.modal, .full-modal');
+          if (modal) {
+            modal.style.display = "none";
+          }
+        });
+      });
+    });
+
+    // Xử lý Full-screen Modal cho Trợ giúp
+    document.addEventListener("DOMContentLoaded", function() {
+      const helpModal = document.getElementById('helpModal');
+      const helpModalClose = document.querySelector('.help-modal-close');
+      const copyCommand = document.getElementById("copyCommand");
+
+      helpModalClose.addEventListener('click', function() {
+        helpModal.style.display = "none";
+      });
+
+      window.addEventListener('click', function(e) {
+        if (e.target == helpModal) {
+          helpModal.style.display = "none";
+        }
+      });
+
+      if (copyCommand) {
+         copyCommand.addEventListener("click", function() {
+             const textToCopy = "chuyển bài toán thành định dạng mà AI có thể đọc được";
+             navigator.clipboard.writeText(textToCopy).then(() => {
+                copyCommand.textContent = "Đã copy!";
+                setTimeout(() => {
+                    copyCommand.textContent = "‘chuyển bài toán thành định dạng mà AI có thể đọc được’";
+                }, 2000);
+             }).catch(err => {
+                console.error("Failed to copy: ", err);
+             });
+         });
       }
     });
   </script>
