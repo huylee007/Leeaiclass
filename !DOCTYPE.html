@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển Đề Toán Thành Văn Bản</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .upload-area {
+            border: 2px dashed #3498db;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .upload-area:hover {
+            background-color: #f5f6fa;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            text-align: left;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chuyển Đề Toán Thành Văn Bản</h1>
+        <p>Upload file ảnh, PDF hoặc Word chứa đề toán</p>
+        <div class="upload-area">
+            <input type="file" id="fileInput" accept=".jpg,.png,.pdf,.docx">
+        </div>
+        <button onclick="simulateProcess()">Xử Lý</button>
+        <div id="result">Kết quả trích xuất sẽ hiển thị ở đây...</div>
+    </div>
+
+    <script>
+        function simulateProcess() {
+            const fileInput = document.getElementById('fileInput');
+            const resultDiv = document.getElementById('result');
+
+            if (!fileInput.files.length) {
+                resultDiv.innerText = "Vui lòng chọn file trước khi xử lý!";
+                return;
+            }
+
+            const fileName = fileInput.files[0].name;
+            resultDiv.innerText = `Đã upload: ${fileName}\n\nKết quả giả lập: Đây là văn bản trích xuất từ file của bạn. Để xử lý thật, cần tích hợp backend (ví dụ: Python + OCR).`;
+        }
+    </script>
+</body>
+</html>
