@@ -420,19 +420,19 @@
     .welcome-section li {
       margin-bottom: 8px;
     }
-    
+
     .collapsible-title {
       cursor: pointer;
       position: relative;
       padding-right: 30px;
       transition: color 0.3s;
     }
-    
+
     /* Removed plus/minus symbols */
     .collapsible-title {
       padding-right: 10px; /* Maintain some padding on the right */
     }
-    
+
     .collapsible-content {
       max-height: 0;
       overflow: hidden;
@@ -440,7 +440,7 @@
       opacity: 0;
       transition: max-height 0.5s ease, opacity 0.5s ease;
     }
-    
+
     .collapsible-content.show {
       max-height: 1000px;
       opacity: 1;
@@ -719,17 +719,17 @@
       transform: translateY(-3px) rotate(8deg);
       box-shadow: var(--shadow-md);
     }
-    
+
     .discord-icon {
       position: relative;
       overflow: visible;
     }
-    
+
     .discord-icon svg {
       filter: drop-shadow(0 0 2px #8a70ff);
       color: #8a70ff;
     }
-    
+
     .discord-icon:hover svg {
       filter: drop-shadow(0 0 4px #8a70ff);
       color: #a391ff;
@@ -881,16 +881,26 @@
     }
 
     .modal-close {
-      color: #aaa;
       position: absolute;
       top: 10px;
-      right: 20px;
-      font-size: 28px;
-      font-weight: bold;
+      right: 10px;
       cursor: pointer;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      transition: var(--transition-fast);
     }
     .modal-close:hover {
-      color: #000;
+      background: rgba(0, 0, 0, 0.1);
+      transform: rotate(90deg);
     }
 
     /* Full-screen Modal cho Trợ giúp */
@@ -912,19 +922,35 @@
     }
     .help-modal-header {
       background: var(--primary-gradient);
-      padding: 10px;
+      padding: 16px 24px;
       text-align: right;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
     }
     .help-modal-close {
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: white;
       cursor: pointer;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      transition: var(--transition-fast);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius-md);
+      backdrop-filter: blur(5px);
+    }
+    .help-modal-close:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: rotate(90deg);
     }
     .help-modal-body {
       padding: 20px;
-      height: calc(100% - 50px);
+      height: calc(100% - 68px);
       overflow-y: auto;
     }
 
@@ -956,10 +982,124 @@
         top: 10px;
         right: 10px;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: bold;
-        color: #333;
+        color: var(--text-secondary);
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        transition: var(--transition-fast);
     }
+    
+    #welcomePopup .modal-close:hover {
+        background: rgba(0, 0, 0, 0.1);
+        transform: rotate(90deg);
+    }
+
+    /* Help Menu Styles */
+    .help-section {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 10px;
+    }
+
+    .help-menu-item {
+      padding: 14px 20px;
+      cursor: pointer;
+      transition: var(--transition-normal);
+      color: var(--text-secondary);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-radius: var(--border-radius-md);
+      background-color: var(--bg-white);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .help-menu-item:hover {
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      transform: translateX(5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .help-menu-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      background-color: var(--primary-color);
+      border-radius: var(--border-radius-md);
+      opacity: 0.2;
+      transition: var(--transition-normal);
+    }
+
+    .help-menu-item:hover::before {
+      width: 5px;
+    }
+
+    /* Topic Modal Styles */
+    #topicModal {
+      display: none; /* Initially hide the topic modal */
+      position: fixed;
+      z-index: 12000; /* Higher z-index than helpModal */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .topic-modal-content {
+      background-color: var(--bg-white);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--shadow-xl);
+      max-width: 80%;
+      max-height: 90%;
+      overflow-y: auto;
+      width: 100%;
+    }
+
+    .topic-modal-close {
+      cursor: pointer;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      transition: var(--transition-fast);
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius-md);
+      backdrop-filter: blur(5px);
+    }
+
+    .topic-modal-close:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: rotate(90deg);
+    }
+
+    #topicContent {
+      padding: 15px;
+    }
+
 
   </style>
 </head>
@@ -967,8 +1107,8 @@
   <div id="welcomePopup">
     <div class="modal-content">
       <span class="modal-close" onclick="document.getElementById('welcomePopup').style.display='none';">&times;</span>
-      <h2>Chào mừng đến với Nền tảng Gia sư!</h2>
-      <p>Nhấn vào 'Môn học' để chọn môn, dùng chatbot để hỏi bài nhé!</p>
+      <h2>Chào mừng đến với Nền tảng Gia sư ảo!</h2>
+      <p>Nhấn vào 'Môn học' để chọn môn, dùng chatbot để hỏi bài nhé! và hãy nhớ AI chỉ hỗ trợ bạn học tập hiệu quả hơn thôi, không phải là một công cụ để giải bài tập đâu :)</p>
     </div>
   </div>
   <!-- HEADER -->
@@ -1138,11 +1278,28 @@
         <button class="help-modal-close" aria-label="Đóng trợ giúp">&times;</button>
       </div>
       <div class="help-modal-body">
-        <h2>Trợ giúp</h2>
-        <p><strong>Cách sử dụng Gia sư Toán</strong></p>
-        <p>1. Chọn 'Gia sư Toán' trong menu.</p>
-        <p>2. Gõ câu hỏi vào chatbot (ví dụ: 'Giải phương trình x^2 = 4').</p>
-        <p>3. Thử hỏi các câu hỏi khác trong chatbot!</p>
+        <div class="help-section">
+          <div class="help-menu-item" data-topic="using-tutor">
+            <div class="emoji-icon">📚</div>
+            Cách sử dụng Gia sư Toán
+          </div>
+          
+          <div class="help-menu-item" data-topic="adding-images">
+            <div class="emoji-icon">🖼️</div>
+            Cách thêm hình ảnh vào AI
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="topicModal" class="full-modal">
+    <div class="topic-modal-content">
+      <div class="help-modal-header">
+        <button class="topic-modal-close" aria-label="Đóng trợ giúp">&times;</button>
+      </div>
+      <div id="topicContent" class="help-modal-body">
+
       </div>
     </div>
   </div>
@@ -1152,13 +1309,13 @@
     window.onload = function() {
       const collapsibleTitle = document.querySelector('.collapsible-title');
       const collapsibleContent = document.querySelector('.collapsible-content');
-      
+
       if (collapsibleTitle && collapsibleContent) {
         collapsibleTitle.classList.add('active');
         collapsibleContent.classList.add('show');
       }
     };
-    
+
     // Toggle Left Sidebar
     const menuToggle = document.getElementById('menuToggle');
     const sidebarLeft = document.getElementById('sidebarLeft');
@@ -1189,12 +1346,12 @@
     // Function to handle collapsible sections
     function setupCollapsible() {
       const collapsibles = document.querySelectorAll('.collapsible-title');
-      
+
       collapsibles.forEach(item => {
         item.addEventListener('click', function() {
           this.classList.toggle('active');
           const content = this.nextElementSibling;
-          
+
           if (content.classList.contains('show')) {
             content.classList.remove('show');
           } else {
@@ -1203,11 +1360,11 @@
         });
       });
     }
-    
+
     document.addEventListener("DOMContentLoaded", function() {
       // Setup collapsible sections on page load
       setupCollapsible();
-      
+
       // Xử lý dropdown menu
       const dropdownItem = document.querySelector('.sidebar-dropdown-item');
       const dropdownMenu = document.querySelector('.sidebar-dropdown-menu');
@@ -1398,7 +1555,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
           footerModal.style.display = "none";
         }
       });
-      
+
       // Ensure all modal close buttons work
       document.querySelectorAll('.modal-close').forEach(closeBtn => {
         closeBtn.addEventListener('click', function() {
@@ -1414,16 +1571,71 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
     document.addEventListener("DOMContentLoaded", function() {
       const helpModal = document.getElementById('helpModal');
       const helpModalClose = document.querySelector('.help-modal-close');
+      const topicModal = document.getElementById('topicModal');
+      const topicModalClose = document.querySelector('.topic-modal-close');
+      const topicContent = document.getElementById('topicContent');
+      const helpTopics = document.querySelectorAll('.help-topic');
       const copyCommand = document.getElementById("copyCommand");
 
+      // Dữ liệu nội dung cho từng mục trợ giúp
+      const topicContents = {
+        'using-tutor': `
+          <h2>Cách sử dụng Gia sư Toán</h2>
+          <p>1. Chọn 'Gia sư Toán' trong menu.</p>
+          <p>2. Gõ câu hỏi vào chatbot (ví dụ: 'Giải phương trình x^2 = 4').</p>
+          <p>3. Thử hỏi các câu hỏi khác trong chatbot!</p>
+        `,
+        'adding-images': `
+          <h2>Cách thêm hình ảnh vào AI</h2>
+          <p>Khi cần gửi hình ảnh để AI giúp giải toán hoặc bất kỳ bài tập nào:</p>
+
+          <p><strong>Bước 1:</strong> Chuẩn bị hình ảnh rõ ràng, đầy đủ của bài toán hoặc bài tập.</p>
+          <p><strong>Bước 2:</strong> Nhấn vào nút tải lên (icon hình kẹp giấy) trong khung chat.</p>
+          <p><strong>Bước 3:</strong> Chọn hình ảnh từ thiết bị của bạn.</p>
+          <p><strong>Bước 4:</strong> Kèm theo một mô tả ngắn về nội dung hình ảnh và câu hỏi của bạn.</p>
+          <p><strong>Bước 5:</strong> Nhấn gửi và đợi AI phân tích hình ảnh.</p>
+          
+          <h3>Lưu ý khi gửi hình ảnh:</h3>
+          <ul>
+            <li>Hình ảnh phải rõ nét, không bị mờ hoặc quá tối</li>
+            <li>Nên chụp thẳng bài toán, tránh góc nghiêng</li>
+            <li>Đảm bảo tất cả các phần của bài toán đều nằm trong hình</li>
+            <li>Tránh các yếu tố gây nhiễu như bóng đổ, vết bẩn</li>
+            <li>Nếu AI không nhận diện được, hãy thử chụp lại với điều kiện ánh sáng tốt hơn</li>
+          </ul>
+        `
+      };
+
+      // Đóng help modal
       helpModalClose.addEventListener('click', function() {
         helpModal.style.display = "none";
       });
 
+      // Đóng topic modal
+      topicModalClose.addEventListener('click', function() {
+        topicModal.style.display = "none";
+        helpModal.style.display = "block"; // Hiển thị lại help modal
+      });
+
+      // Xử lý click bên ngoài để đóng modal
       window.addEventListener('click', function(e) {
         if (e.target == helpModal) {
           helpModal.style.display = "none";
         }
+        if (e.target == topicModal) {
+          topicModal.style.display = "none";
+          helpModal.style.display = "block"; // Hiển thị lại help modal
+        }
+      });
+
+      // Xử lý click vào từng mục trợ giúp
+      document.querySelectorAll('.help-menu-item').forEach(topic => {
+        topic.addEventListener('click', function() {
+          const topicId = this.getAttribute('data-topic');
+          topicContent.innerHTML = topicContents[topicId] || 'Nội dung đang được cập nhật...';
+          helpModal.style.display = "none";
+          topicModal.style.display = "block";
+        });
       });
 
       if (copyCommand) {
@@ -1432,7 +1644,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
              navigator.clipboard.writeText(textToCopy).then(() => {
                 copyCommand.textContent = "Đã copy!";
                 setTimeout(() => {
-                    copyCommand.textContent = "‘chuyển bài toán thành định dạng mà AI có thể đọc được’";
+                    copyCommand.textContent = "'chuyển bài toán thành định dạng mà AI có thể đọc được'";
                 }, 2000);
              }).catch(err => {
                 console.error("Failed to copy: ", err);
