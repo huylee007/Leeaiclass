@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -1142,6 +1143,114 @@
       height: 16px;
     }
   }
+  
+  /* CSS cho thông báo phóng to */
+  .expand-notification {
+    position: relative;
+    margin: 0 0 16px 0;
+    animation: slideIn 0.5s ease-out, pulse 2s infinite;
+  }
+  
+  .notification-content {
+    background: var(--primary-gradient);
+    color: white;
+    border-radius: var(--border-radius-md);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .notification-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 80%);
+    z-index: 0;
+  }
+  
+  .notification-icon {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  
+  .notification-text {
+    flex: 1;
+    font-weight: 500;
+    z-index: 1;
+  }
+  
+  .close-notification-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 1;
+  }
+  
+  .close-notification-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: rotate(90deg);
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+    }
+    50% {
+      box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .expand-notification {
+      margin: 0 0 12px 0;
+    }
+    
+    .notification-content {
+      padding: 10px 14px;
+    }
+    
+    .notification-icon {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .notification-text {
+      font-size: 14px;
+    }
+  }
 
   /* Thông báo đã được sửa đổi */
   .fixed-notification {
@@ -1213,7 +1322,7 @@
   <!-- HEADER -->
   <header>
     <div class="header-buttons">
-      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" onclick="toggleLeftSidebar()">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="12" x2="21" y2="12"></line>
           <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -1229,21 +1338,21 @@
   </header>
 
   <!-- Overlay -->
-  <div id="overlay" class="overlay"></div>
+  <div id="overlay" class="overlay" onclick="toggleLeftSidebar()"></div>
 
   <!-- LEFT SIDEBAR -->
   <div class="sidebar-left" id="sidebarLeft">
     <div class="sidebar-left-title">Chọn môn học</div>
     <ul class="sidebar-menu">
-      <li class="sidebar-menu-item active" data-tutor="math">
+      <li class="sidebar-menu-item active" data-tutor="math" onclick="switchTutor('math')">
         <div class="emoji-icon">📐</div>
         Gia sư Toán
       </li>
-      <li class="sidebar-menu-item" data-tutor="english">
+      <li class="sidebar-menu-item" data-tutor="english" onclick="switchTutor('english')">
         <div class="emoji-icon">🇬🇧</div>
         Gia sư Anh
       </li>
-      <li class="sidebar-menu-item" data-tutor="literature">
+      <li class="sidebar-menu-item" data-tutor="literature" onclick="switchTutor('literature')">
         <div class="emoji-icon">📖</div>
         Gia sư Văn
       </li>
@@ -1251,7 +1360,7 @@
       <li class="sidebar-divider"></li>
 
       <!-- Tùy chọn trong menu -->
-      <li class="sidebar-menu-item sidebar-dropdown-item" tabindex="0" aria-expanded="false">
+      <li class="sidebar-menu-item sidebar-dropdown-item" tabindex="0" aria-expanded="false" onclick="toggleDropdown(this)">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="3"></circle>
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
@@ -1262,7 +1371,7 @@
         </svg>
       </li>
       <div class="sidebar-dropdown-menu">
-        <li class="sidebar-menu-item dropdown-menu-item" id="menuHelpBtn">
+        <li class="sidebar-menu-item dropdown-menu-item" onclick="showHelpModal()">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
@@ -1270,13 +1379,13 @@
           </svg>
           Trợ giúp
         </li>
-        <li class="sidebar-menu-item dropdown-menu-item" id="menuThemeToggleBtn">
+        <li class="sidebar-menu-item dropdown-menu-item" onclick="toggleDarkMode()">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
           Giao diện tối/sáng
         </li>
-        <li class="sidebar-menu-item dropdown-menu-item" id="menuFeedbackBtn">
+        <li class="sidebar-menu-item dropdown-menu-item" onclick="toggleFeedbackSidebar()">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
@@ -1290,8 +1399,8 @@
   <div class="content-container">
     <main>
       <div class="welcome-section" id="welcomeSection">
-        <h2 class="collapsible-title">Gia sư Toán</h2>
-        <div class="collapsible-content">
+        <h2 class="collapsible-title" onclick="toggleCollapsible(this)">Gia sư Toán</h2>
+        <div class="collapsible-content show">
           <p>
             Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể nhận sự trợ giúp của AI ' Gia sư toán'. Gia sư toán sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.
           </p>
@@ -1302,14 +1411,46 @@
         </div>
       </div>
 
-      <!-- Thông báo đơn giản nằm ngoài chatbot -->
-      <div id="chatExpandNotification" class="fixed-notification">
-        <span>Màn hình chat quá nhỏ? Bấm vào nút phóng to ở góc trên bên phải để mở rộng cửa sổ chat!</span>
-        <button id="closeNotificationBtn" class="close-notification-btn">&times;</button>
+      <!-- Thông báo hiện đại hơn (chỉ dùng HTML) -->
+      <div id="expandNotification" style="position: relative; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; padding: 16px 24px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 6px 20px rgba(79, 70, 229, 0.25); overflow: hidden; animation: slideIn 0.5s ease-out forwards; backdrop-filter: blur(5px);">
+        <!-- Hiệu ứng ánh sáng mờ ở góc -->
+        <div style="position: absolute; top: -10px; right: -10px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); filter: blur(20px); border-radius: 50%;"></div>
+        
+        <div style="display: flex; align-items: center; gap: 12px; position: relative; z-index: 2; flex: 1;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 22px;">
+            <path d="M15 3h6v6"></path>
+            <path d="M10 14L21 3"></path>
+            <path d="M9 21H3v-6"></path>
+            <path d="M14 10L3 21"></path>
+          </svg>
+          <div>
+            <div style="font-weight: 600; font-size: 1rem; letter-spacing: 0.2px; display: flex; align-items: center;">
+              Mở rộng khung chat
+              <div style="display: inline-flex; align-items: center; background: rgba(255,255,255,0.15); padding: 2px 6px; border-radius: 4px; margin-left: 8px; font-size: 0.8rem;">
+                <span>Tip</span>
+              </div>
+            </div>
+            <div style="font-weight: 400; font-size: 0.95rem; opacity: 0.9; margin-top: 3px;">Màn hình chat quá nhỏ? Bấm vào nút phóng to ở góc trên bên phải!</div>
+          </div>
+        </div>
+        
+        <button onclick="this.parentElement.style.display='none'; localStorage.setItem('expandNotificationClosed', 'true');" style="background: transparent; border: none; color: white; padding: 8px; cursor: pointer; margin-left: 12px; transition: all 0.2s ease; outline: none; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        
+        <style>
+          @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        </style>
       </div>
 
       <div class="chatbot-container">
-        <a href="https://cloud.dify.ai/explore/installed/7898f6ba-9919-4a99-a0cf-ba57d5f48b3a" class="expand-button" target="_blank" title="Mở rộng" id="expandBtn">
+        <a href="https://udify.app/chat/M1dEP0lGehU2sX7e" class="expand-button" target="_blank" title="Mở rộng" id="expandBtn">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 3h6v6"></path>
             <path d="M10 14L21 3"></path>
@@ -1352,10 +1493,10 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-links">
-      <a href="#" class="footer-link">Giới thiệu</a>
-      <a href="#" class="footer-link">Chính sách riêng tư</a>
-      <a href="#" class="footer-link">Điều khoản sử dụng</a>
-      <a href="#" class="footer-link">Liên hệ</a>
+      <a href="#" class="footer-link" onclick="showFooterModal('Giới thiệu')">Giới thiệu</a>
+      <a href="#" class="footer-link" onclick="showFooterModal('Chính sách riêng tư')">Chính sách riêng tư</a>
+      <a href="#" class="footer-link" onclick="showFooterModal('Điều khoản sử dụng')">Điều khoản sử dụng</a>
+      <a href="#" class="footer-link" onclick="showFooterModal('Liên hệ')">Liên hệ</a>
     </div>
 
     <div class="social-links">
@@ -1376,7 +1517,7 @@
   <!-- Modal Popup cho Footer Links -->
   <div id="footerModal" class="modal">
     <div class="modal-content">
-      <span class="modal-close">&times;</span>
+      <span class="modal-close" onclick="closeFooterModal()">&times;</span>
       <div id="modalText"></div>
     </div>
   </div>
@@ -1385,16 +1526,16 @@
   <div id="helpModal" class="full-modal">
     <div class="help-modal-content">
       <div class="help-modal-header">
-        <button class="help-modal-close" aria-label="Đóng trợ giúp">&times;</button>
+        <button class="help-modal-close" aria-label="Đóng trợ giúp" onclick="closeHelpModal()">&times;</button>
       </div>
       <div class="help-modal-body">
         <div class="help-section">
-          <div class="help-menu-item" data-topic="using-tutor">
+          <div class="help-menu-item" data-topic="using-tutor" onclick="showTopicModal('using-tutor')">
             <div class="emoji-icon">📚</div>
             Cách sử dụng Gia sư Toán
           </div>
 
-          <div class="help-menu-item" data-topic="adding-images">
+          <div class="help-menu-item" data-topic="adding-images" onclick="showTopicModal('adding-images')">
             <div class="emoji-icon">🖼️</div>
             Cách thêm hình ảnh vào AI
           </div>
@@ -1406,7 +1547,7 @@
   <div id="topicModal" class="full-modal">
     <div class="topic-modal-content">
       <div class="help-modal-header">
-        <button class="topic-modal-close" aria-label="Đóng trợ giúp">&times;</button>
+        <button class="topic-modal-close" aria-label="Đóng trợ giúp" onclick="closeTopicModal()">&times;</button>
       </div>
       <div id="topicContent" class="help-modal-body">
 
@@ -1415,226 +1556,67 @@
   </div>
 
   <script>
-    // Xử lý đóng thông báo phóng to
-    document.addEventListener("DOMContentLoaded", function() {
-      const notification = document.getElementById('chatExpandNotification');
-      const closeBtn = document.getElementById('closeNotificationBtn');
-      
-      // Kiểm tra xem thông báo đã được đóng trước đó chưa
-      if (localStorage.getItem('expandNotificationClosed') === 'true') {
-        if (notification) notification.style.display = 'none';
-      }
-      
-      // Xử lý đóng thông báo
-      if (closeBtn && notification) {
-        closeBtn.addEventListener('click', function() {
-          notification.style.display = 'none';
-          localStorage.setItem('expandNotificationClosed', 'true');
-        });
-      }
-    });
-    
-    // Function to toggle collapsible content open on initial load
-    window.onload = function() {
-      const collapsibleTitle = document.querySelector('.collapsible-title');
-      const collapsibleContent = document.querySelector('.collapsible-content');
+    // Dữ liệu nội dung cho từng mục trợ giúp
+    const topicContents = {
+      'using-tutor': `
+        <h2>Cách sử dụng Gia sư Toán</h2>
+        <p>1. Chọn 'Gia sư Toán' trong menu.</p>
+        <p>2. Gõ câu hỏi vào chatbot (ví dụ: 'Giải phương trình x^2 = 4').</p>
+        <p>3. Thử hỏi các câu hỏi khác trong chatbot!</p>
+      `,
+      'adding-images': `
+        <h2>Cách thêm hình ảnh vào AI</h2>
+        <p>Khi cần gửi hình ảnh để AI giúp giải toán hoặc bất kỳ bài tập nào:</p>
 
-      if (collapsibleTitle && collapsibleContent) {
-        collapsibleTitle.classList.add('active');
-        collapsibleContent.classList.add('show');
+        <p><strong>Bước 1:</strong> Chuẩn bị hình ảnh rõ ràng, đầy đủ của bài toán hoặc bài tập.</p>
+        <p><strong>Bước 2:</strong> Nhấn vào nút tải lên (icon hình kẹp giấy) trong khung chat.</p>
+        <p><strong>Bước 3:</strong> Chọn hình ảnh từ thiết bị của bạn.</p>
+        <p><strong>Bước 4:</strong> Kèm theo một mô tả ngắn về nội dung hình ảnh và câu hỏi của bạn.</p>
+        <p><strong>Bước 5:</strong> Nhấn gửi và đợi AI phân tích hình ảnh.</p>
+
+        <h3>Lưu ý khi gửi hình ảnh:</h3>
+        <ul>
+          <li>Hình ảnh phải rõ nét, không bị mờ hoặc quá tối</li>
+          <li>Nên chụp thẳng bài toán, tránh góc nghiêng</li>
+          <li>Đảm bảo tất cả các phần của bài toán đều nằm trong hình</li>
+          <li>Tránh các yếu tố gây nhiễu như bóng đổ, vết bẩn</li>
+          <li>Nếu AI không nhận diện được, hãy thử chụp lại với điều kiện ánh sáng tốt hơn</li>
+        </ul>
+      `
+    };
+
+    // Map liên kết phóng to và nội dung cho từng loại chatbot
+    const tutorMapping = {
+      math: {
+        title: 'Gia sư Toán',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng chất lượng cao, hướng dẫn giải bài tập chi tiết, cùng những mẹo học tập toán học hiệu quả từ các chuyên gia hàng đầu.',
+        iframe: 'https://udify.app/chatbot/M1dEP0lGehU2sX7e',
+        expandLink: 'https://udify.app/chat/M1dEP0lGehU2sX7e'
+      },
+      english: {
+        title: 'Gia sư Anh',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Anh</strong>. Tại đây, bạn có thể học tiếng Anh qua các bài giảng và tương tác với trợ lý AI.',
+        iframe: 'https://udify.app/chatbot/OLxmx5Fm8v6rTAXo',
+        expandLink: 'https://udify.app/chat/OLxmx5Fm8v6rTAXo'
+      },
+      literature: {
+        title: 'Gia sư Văn',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Văn</strong>. Đây là nơi chia sẻ kiến thức và các bài giảng về Ngữ Văn.',
+        iframe: 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7',
+        expandLink: 'https://udify.app/chat/6UaZkt1RQQHDqfJ7'
       }
     };
 
-    // Toggle Left Sidebar
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebarLeft = document.getElementById('sidebarLeft');
-    const overlay = document.getElementById('overlay');
-
-    function toggleLeftSidebar() {
-      if(sidebarLeft) sidebarLeft.classList.toggle('open');
-      if(overlay) overlay.classList.toggle('active');
-    }
-
-    if(menuToggle) menuToggle.addEventListener('click', toggleLeftSidebar);
-    if(overlay) overlay.addEventListener('click', toggleLeftSidebar);
-
-    // Hàm toggle Sidebar Feedback (Góp ý)
-    function toggleFeedbackSidebar() {
-      const sidebarRight = document.getElementById('sidebarRight');
-      if (sidebarRight) {
-        sidebarRight.classList.toggle('open');
-        if (sidebarRight.classList.contains('open')) {
-          overlay.classList.add('active');
-        } else {
-          overlay.classList.remove('active');
-        }
-      }
-    }
-
-    // Function to handle collapsible sections
-    function setupCollapsible() {
-      const collapsibles = document.querySelectorAll('.collapsible-title');
-
-      collapsibles.forEach(item => {
-        item.addEventListener('click', function() {
-          this.classList.toggle('active');
-          const content = this.nextElementSibling;
-
-          if (content.classList.contains('show')) {
-            content.classList.remove('show');
-          } else {
-            content.classList.add('show');
-          }
-        });
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      // Setup collapsible sections on page load
-      setupCollapsible();
-
-      // Xử lý dropdown menu
-      const dropdownItem = document.querySelector('.sidebar-dropdown-item');
-      const dropdownMenu = document.querySelector('.sidebar-dropdown-menu');
-
-      if (dropdownItem && dropdownMenu) {
-        dropdownItem.addEventListener('click', function() {
-          dropdownItem.classList.toggle('active');
-          dropdownMenu.classList.toggle('open');
-        });
-      }
-
-      const menuItems = document.querySelectorAll('.sidebar-menu-item:not(.sidebar-dropdown-item):not(.dropdown-menu-item)');
-      const chatbotFrame = document.getElementById('chatbotFrame');
-      const welcomeSection = document.getElementById('welcomeSection');
-
-      const tutorMapping = {
-        math: {
-          title: 'Gia sư Toán',
-          description: 'Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng chất lượng cao, hướng dẫn giải bài tập chi tiết, cùng những mẹo học tập toán học hiệu quả từ các chuyên gia hàng đầu.',
-          iframe: 'https://udify.app/chatbot/M1dEP0lGehU2sX7e'
-        },
-        english: {
-          title: 'Gia sư Anh',
-          description: 'Chào mừng bạn đến với <strong>Gia sư Anh</strong>. Tại đây, bạn có thể học tiếng Anh qua các bài giảng và tương tác với trợ lý AI.',
-          iframe: 'https://udify.app/chatbot/OLxmx5Fm8v6rTAXo'
-        },
-        literature: {
-          title: 'Gia sư Văn',
-          description: 'Chào mừng bạn đến với <strong>Gia sư Văn</strong>. Đây là nơi chia sẻ kiến thức và các bài giảng về Ngữ Văn.',
-          iframe: 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7'
-        }
-      };
-
-      // Map liên kết phóng to cho từng loại chatbot
-      const expandLinks = {
-        math: 'https://cloud.dify.ai/explore/installed/7898f6ba-9919-4a99-a0cf-ba57d5f48b3a',
-        literature: 'https://cloud.dify.ai/explore/installed/c93a8507-2617-4236-81fd-535f5d3fe7d0',
-        english: 'https://cloud.dify.ai/explore/installed/aea83af6-00f8-41b1-b0b4-af7b6857f966'
-      };
-
-      // Lấy nút phóng to
-      const expandBtn = document.getElementById('expandBtn');
-
-      menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-          menuItems.forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
-
-          const tutor = item.getAttribute('data-tutor');
-          const selectedTutor = tutorMapping[tutor];
-
-          if (selectedTutor) {
-            welcomeSection.innerHTML = `
-              <h2 class="collapsible-title">${selectedTutor.title}</h2>
-              <div class="collapsible-content">
-                <p>${selectedTutor.description}</p>
-                <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>
-              </div>
-            `;
-            setupCollapsible();
-            chatbotFrame.src = selectedTutor.iframe;
-
-            // Cập nhật liên kết cho nút phóng to
-            if (expandBtn && expandLinks[tutor]) {
-              expandBtn.href = expandLinks[tutor];
-            }
-          }
-        });
-      });
-    });
-
-    // Xử lý các chức năng menu trong sidebar
-    document.addEventListener("DOMContentLoaded", function() {
-      const helpModal = document.getElementById('helpModal');
-
-      // Menu tùy chọn bên sidebar
-      const menuHelpBtn = document.getElementById('menuHelpBtn');
-      const menuThemeToggleBtn = document.getElementById('menuThemeToggleBtn');
-      const menuFeedbackBtn = document.getElementById('menuFeedbackBtn');
-
-      // Xử lý nút trợ giúp trong menu
-      if (menuHelpBtn) {
-        menuHelpBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          if(helpModal) helpModal.style.display = "block";
-          // Đóng sidebar menu trên mobile nếu đang mở
-          if (window.innerWidth < 1200) {
-            sidebarLeft.classList.remove('open');
-            overlay.classList.remove('active');
-          }
-        });
-      }
-
-      // Xử lý nút giao diện trong menu
-      if (menuThemeToggleBtn) {
-        menuThemeToggleBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          document.body.classList.toggle('dark-mode');
-          // Đóng sidebar menu trên mobile nếu đang mở
-          if (window.innerWidth < 1200) {
-            sidebarLeft.classList.remove('open');
-            overlay.classList.remove('active');
-          }
-        });
-      }
-
-      // Xử lý nút góp ý trong menu
-      if (menuFeedbackBtn) {
-        menuFeedbackBtn.addEventListener('click', function(e) {
-          e.preventDefault();
-          toggleFeedbackSidebar();
-          // Đóng sidebar menu trên mobile nếu đang mở
-          if (window.innerWidth < 1200) {
-            sidebarLeft.classList.remove('open');
-            overlay.classList.remove('active');
-          }
-        });
-      }
-
-      // Update iframe source in Feedback sidebar
-      const sidebarRightIframe = document.querySelector('.sidebar-content iframe');
-      if (sidebarRightIframe) {
-        sidebarRightIframe.src = "https://docs.google.com/forms/d/e/1FAIpQLSfP8p-6TarFlG8EHTYOXcfYbKObW7khCbtv9JNcUO8RWm3RLA/viewform?embedded=true";
-      }
-    });
-
-    // Xử lý Modal cho Footer Links
-    document.addEventListener("DOMContentLoaded", function() {
-      const footerLinks = document.querySelectorAll('.footer-link');
-      const footerModal = document.getElementById('footerModal');
-      const modalText = document.getElementById('modalText');
-      const modalClose = document.querySelector('#footerModal .modal-close');
-
-      const modalContentMapping = {
-        "Giới thiệu": `<strong>Giới thiệu</strong><br>
+    // Nội dung cho modal footer
+    const modalContentMapping = {
+      "Giới thiệu": `<strong>Giới thiệu</strong><br>
 Gia sư Ảo là nền tảng học trực tuyến chuyên biệt về toán học, ngữ văn, anh văn. Hướng dẫn giải bài tập chi tiết và những mẹo học tập hiệu quả. Chúng tôi cam kết mang đến trải nghiệm học tập toàn diện, từ kiến thức cơ bản đến nâng cao, phù hợp với mọi đối tượng học sinh.`,
-        "Liên hệ": `<strong>Liên hệ</strong><br>
+      "Liên hệ": `<strong>Liên hệ</strong><br>
 Gmail: <a href="mailto:legiahuyltv@gmail.com">legiahuyltv@gmail.com</a>`,
-        "Trợ giúp": `<strong>Trợ giúp</strong><br>`,
-        "Chính sách riêng tư": `<strong>Chính sách riêng tư</strong><br>
+      "Trợ giúp": `<strong>Trợ giúp</strong><br>`,
+      "Chính sách riêng tư": `<strong>Chính sách riêng tư</strong><br>
 Chúng tôi tôn trọng và bảo vệ quyền riêng tưcủa người dùng. Thông tin cá nhân của bạn được bảo mật và chỉ được sử dụng để cải thiện trải nghiệm học tập. Chúng tôi không chia sẻ dữ liệu cá nhân với bên thứ ba khi chưa có sự đồng ý. Mọi dữ liệu học tập và tiến trình của bạn được lưu trữ an toàn và chỉ bạn cùng giáo viên hướng dẫn mới có quyền truy cập.`,
-        "Điều khoản sử dụng": `<strong>Điều khoản sử dụng</strong><br>
+      "Điều khoản sử dụng": `<strong>Điều khoản sử dụng</strong><br>
 1. Chấp nhận điều khoản<br>
 Bằng việc truy cập và sử dụng chatbot Gia sư Toán ("Chatbot"), bạn đồng ý tuân thủ và bị ràng buộc bởi tất cả các điều khoản và điều kiện được nêu trong văn bản này. Nếu bạn không đồng ý với bất kỳ phần nào của các điều khoản này, vui lòng không sử dụng Chatbot.<br>
 2. Điều kiện sử dụng<br><br>
@@ -1675,130 +1657,208 @@ Bất kỳ tranh chấp nào phát sinh từ việc sử dụng Chatbot sẽ đ�
 11. Phản hồi và báo cáo lạm dụng<br><br>
 Người dùng được khuyến khích báo cáo nội dung không phù hợp hoặc lạm dụng Chatbot.<br>
 Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đánh giá cao.`
-      };
+    };
 
-      footerLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const key = link.textContent.trim();
-          const content = modalContentMapping[key] || "Nội dung không khả dụng.";
-          modalText.innerHTML = content;
-          footerModal.style.display = "block";
-        });
-      });
-
-      if (modalClose) {
-        modalClose.addEventListener('click', function() {
-          footerModal.style.display = "none";
-        });
+    // Function to toggle collapsible content
+    function toggleCollapsible(element) {
+      element.classList.toggle('active');
+      const content = element.nextElementSibling;
+      if (content.classList.contains('show')) {
+        content.classList.remove('show');
+      } else {
+        content.classList.add('show');
       }
+    }
 
-      window.addEventListener('click', function(e) {
-        if (e.target == footerModal) {
-          footerModal.style.display = "none";
+    // Function to toggle left sidebar
+    function toggleLeftSidebar() {
+      const sidebarLeft = document.getElementById('sidebarLeft');
+      const overlay = document.getElementById('overlay');
+      if (sidebarLeft) sidebarLeft.classList.toggle('open');
+      if (overlay) overlay.classList.toggle('active');
+    }
+
+    // Function to toggle feedback sidebar
+    function toggleFeedbackSidebar() {
+      const sidebarRight = document.getElementById('sidebarRight');
+      const overlay = document.getElementById('overlay');
+      if (sidebarRight) {
+        sidebarRight.classList.toggle('open');
+        if (sidebarRight.classList.contains('open')) {
+          overlay.classList.add('active');
+        } else {
+          overlay.classList.remove('active');
+        }
+      }
+      
+      // Đóng sidebar menu trên mobile nếu đang mở
+      if (window.innerWidth < 1200) {
+        const sidebarLeft = document.getElementById('sidebarLeft');
+        if (sidebarLeft) sidebarLeft.classList.remove('open');
+      }
+    }
+
+    // Toggle dropdown menu
+    function toggleDropdown(element) {
+      element.classList.toggle('active');
+      const dropdownMenu = element.nextElementSibling;
+      if (dropdownMenu) {
+        dropdownMenu.classList.toggle('open');
+      }
+    }
+
+    // Switch tutor function
+    function switchTutor(tutorType) {
+      // Update active class
+      const menuItems = document.querySelectorAll('.sidebar-menu-item[data-tutor]');
+      menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-tutor') === tutorType) {
+          item.classList.add('active');
         }
       });
 
-      // Ensure all modal close buttons work
-      document.querySelectorAll('.modal-close').forEach(closeBtn => {
-        closeBtn.addEventListener('click', function() {
-          const modal = this.closest('.modal, .full-modal');
-          if (modal) {
-            modal.style.display = "none";
-          }
-        });
-      });
+      const selectedTutor = tutorMapping[tutorType];
+      
+      if (selectedTutor) {
+        // Update welcome section
+        const welcomeSection = document.getElementById('welcomeSection');
+        welcomeSection.innerHTML = `
+          <h2 class="collapsible-title" onclick="toggleCollapsible(this)">${selectedTutor.title}</h2>
+          <div class="collapsible-content show">
+            <p>${selectedTutor.description}</p>
+            <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>
+          </div>
+        `;
+        
+        // Update chatbot iframe
+        const chatbotFrame = document.getElementById('chatbotFrame');
+        chatbotFrame.src = selectedTutor.iframe;
+        
+        // Update expand button link
+        const expandBtn = document.getElementById('expandBtn');
+        if (expandBtn) {
+          expandBtn.href = selectedTutor.expandLink;
+        }
+      }
+      
+      // Close sidebar on mobile
+      if (window.innerWidth < 1200) {
+        toggleLeftSidebar();
+      }
+    }
+
+    // Function to toggle dark mode
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      // Close mobile sidebar after changing theme
+      if (window.innerWidth < 1200) {
+        toggleLeftSidebar();
+      }
+    }
+
+    // Function to close notification
+    function closeNotification() {
+      const notification = document.getElementById('chatExpandNotification');
+      if (notification) {
+        notification.style.display = 'none';
+        localStorage.setItem('expandNotificationClosed', 'true');
+      }
+    }
+
+    // Check if notification should be hidden
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('expandNotificationClosed') === 'true') {
+        const notification = document.getElementById('chatExpandNotification');
+        if (notification) notification.style.display = 'none';
+      }
+      
+      // Đảm bảo nút đóng hoạt động đúng
+      const closeBtn = document.getElementById('closeNotificationBtn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeNotification);
+      }
     });
 
-    // Xử lý Full-screen Modal cho Trợ giúp
-    document.addEventListener("DOMContentLoaded", function() {
+    // Help Modal functions
+    function showHelpModal() {
       const helpModal = document.getElementById('helpModal');
-      const helpModalClose = document.querySelector('.help-modal-close');
+      if (helpModal) helpModal.style.display = 'block';
+      
+      // Close sidebar on mobile
+      if (window.innerWidth < 1200) {
+        toggleLeftSidebar();
+      }
+    }
+
+    function closeHelpModal() {
+      const helpModal = document.getElementById('helpModal');
+      if (helpModal) helpModal.style.display = 'none';
+    }
+
+    // Topic Modal functions
+    function showTopicModal(topicId) {
       const topicModal = document.getElementById('topicModal');
-      const topicModalClose = document.querySelector('.topic-modal-close');
       const topicContent = document.getElementById('topicContent');
-      const helpTopics = document.querySelectorAll('.help-topic');
-      const copyCommand = document.getElementById("copyCommand");
-
-      // Dữ liệu nội dung cho từng mục trợ giúp
-      const topicContents = {
-        'using-tutor': `
-          <h2>Cách sử dụng Gia sư Toán</h2>
-          <p>1. Chọn 'Gia sư Toán' trong menu.</p>
-          <p>2. Gõ câu hỏi vào chatbot (ví dụ: 'Giải phương trình x^2 = 4').</p>
-          <p>3. Thử hỏi các câu hỏi khác trong chatbot!</p>
-        `,
-        'adding-images': `
-          <h2>Cách thêm hình ảnh vào AI</h2>
-          <p>Khi cần gửi hình ảnh để AI giúp giải toán hoặc bất kỳ bài tập nào:</p>
-
-          <p><strong>Bước 1:</strong> Chuẩn bị hình ảnh rõ ràng, đầy đủ của bài toán hoặc bài tập.</p>
-          <p><strong>Bước 2:</strong> Nhấn vào nút tải lên (icon hình kẹp giấy) trong khung chat.</p>
-          <p><strong>Bước 3:</strong> Chọn hình ảnh từ thiết bị của bạn.</p>
-          <p><strong>Bước 4:</strong> Kèm theo một mô tả ngắn về nội dung hình ảnh và câu hỏi của bạn.</p>
-          <p><strong>Bước 5:</strong> Nhấn gửi và đợi AI phân tích hình ảnh.</p>
-
-          <h3>Lưu ý khi gửi hình ảnh:</h3>
-          <ul>
-            <li>Hình ảnh phải rõ nét, không bị mờ hoặc quá tối</li>
-            <li>Nên chụp thẳng bài toán, tránh góc nghiêng</li>
-            <li>Đảm bảo tất cả các phần của bài toán đều nằm trong hình</li>
-            <li>Tránh các yếu tố gây nhiễu như bóng đổ, vết bẩn</li>
-            <li>Nếu AI không nhận diện được, hãy thử chụp lại với điều kiện ánh sáng tốt hơn</li>
-          </ul>
-        `
-      };
-
-      // Đóng help modal
-      if (helpModalClose) {
-        helpModalClose.addEventListener('click', function() {
-          helpModal.style.display = "none";
-        });
+      const helpModal = document.getElementById('helpModal');
+      
+      if (topicModal && topicContent) {
+        topicContent.innerHTML = topicContents[topicId] || 'Nội dung đang được cập nhật...';
+        helpModal.style.display = 'none';
+        topicModal.style.display = 'block';
       }
+    }
 
-      // Đóng topic modal
-      if (topicModalClose) {
-        topicModalClose.addEventListener('click', function() {
-          topicModal.style.display = "none";
-          helpModal.style.display = "block"; // Hiển thị lại help modal
-        });
+    function closeTopicModal() {
+      const topicModal = document.getElementById('topicModal');
+      const helpModal = document.getElementById('helpModal');
+      
+      if (topicModal) topicModal.style.display = 'none';
+      if (helpModal) helpModal.style.display = 'block';
+    }
+
+    // Footer Modal functions
+    function showFooterModal(key) {
+      const footerModal = document.getElementById('footerModal');
+      const modalText = document.getElementById('modalText');
+      
+      if (footerModal && modalText) {
+        const content = modalContentMapping[key] || "Nội dung không khả dụng.";
+        modalText.innerHTML = content;
+        footerModal.style.display = 'block';
       }
+    }
 
-      // Xử lý click bên ngoài để đóng modal
-      window.addEventListener('click', function(e) {
-        if (e.target == helpModal) {
-          helpModal.style.display = "none";
-        }
-        if (e.target == topicModal) {
-          topicModal.style.display = "none";
-          helpModal.style.display = "block"; // Hiển thị lại help modal
-        }
-      });
+    function closeFooterModal() {
+      const footerModal = document.getElementById('footerModal');
+      if (footerModal) footerModal.style.display = 'none';
+    }
 
-      // Xử lý click vào từng mục trợ giúp
-      document.querySelectorAll('.help-menu-item').forEach(topic => {
-        topic.addEventListener('click', function() {
-          const topicId = this.getAttribute('data-topic');
-          topicContent.innerHTML = topicContents[topicId] || 'Nội dung đang được cập nhật...';
-          helpModal.style.display = "none";
-          topicModal.style.display = "block";
-        });
-      });
-
-      if (copyCommand) {
-         copyCommand.addEventListener("click", function() {
-             const textToCopy = "chuyển bài toán thành định dạng mà AI có thể đọc được";
-             navigator.clipboard.writeText(textToCopy).then(() => {
-                copyCommand.textContent = "Đã copy!";
-                setTimeout(() => {
-                    copyCommand.textContent = "'chuyển bài toán thành định dạng mà AI có thể đọc được'";
-                }, 2000);
-             }).catch(err => {
-                console.error("Failed to copy: ", err);
-             });
-         });
+    // Close modals when clicking outside
+    window.onclick = function(event) {
+      const footerModal = document.getElementById('footerModal');
+      const helpModal = document.getElementById('helpModal');
+      const topicModal = document.getElementById('topicModal');
+      
+      if (event.target == footerModal) {
+        footerModal.style.display = 'none';
       }
-    });
+      if (event.target == helpModal) {
+        helpModal.style.display = 'none';
+      }
+      if (event.target == topicModal) {
+        topicModal.style.display = 'none';
+        helpModal.style.display = 'block';
+      }
+    }
+
+    // Ensure welcome section collapsible is open on load
+    window.onload = function() {
+      const collapsibleContent = document.querySelector('.collapsible-content');
+      if (collapsibleContent) {
+        collapsibleContent.classList.add('show');
+      }
+    };
   </script>
 </body>
 </html>
