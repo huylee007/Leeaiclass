@@ -967,14 +967,12 @@
       z-index: 10000;
     }
 
-    #welcomePopup .modal-content {
-      background-color: white;
+    #welcomePopup .modal-content {      background-color: white;
       margin: 10% auto;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      max-width: 400px;
+      text-align: center;      max-width: 400px;
     }
 
     #welcomePopup .modal-close {
@@ -995,7 +993,7 @@
         border-radius: 50%;
         transition: var(--transition-fast);
     }
-    
+
     #welcomePopup .modal-close:hover {
         background: rgba(0, 0, 0, 0.1);
         transform: rotate(90deg);
@@ -1101,6 +1099,107 @@
     }
 
 
+  /* CSS cho nút phóng to chatbot */
+  .expand-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-gradient);
+    color: white;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+    transition: var(--transition-normal);
+    border: none;
+    text-decoration: none;
+  }
+
+  .expand-button:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .expand-button:active {
+    transform: scale(0.95);
+  }
+
+  /* Điều chỉnh vị trí cho thiết bị di động */
+  @media (max-width: 768px) {
+    .expand-button {
+      width: 36px;
+      height: 36px;
+      top: 8px;
+      right: 8px;
+    }
+
+    .expand-button svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  /* Thông báo đã được sửa đổi */
+  .fixed-notification {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 20px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    z-index: 20;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: pulse 2s infinite;
+  }
+  
+  .close-notification-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: all 0.2s;
+  }
+  
+  .close-notification-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .fixed-notification {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  }
+
   </style>
 </head>
 <body>
@@ -1132,8 +1231,6 @@
   <!-- Overlay -->
   <div id="overlay" class="overlay"></div>
 
-  <!-- Removed Auxiliary Tab as it's now integrated into the sidebar menu -->
-
   <!-- LEFT SIDEBAR -->
   <div class="sidebar-left" id="sidebarLeft">
     <div class="sidebar-left-title">Chọn môn học</div>
@@ -1157,7 +1254,7 @@
       <li class="sidebar-menu-item sidebar-dropdown-item" tabindex="0" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
         Tùy chọn
         <svg class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1205,7 +1302,22 @@
         </div>
       </div>
 
+      <!-- Thông báo đơn giản nằm ngoài chatbot -->
+      <div id="chatExpandNotification" class="fixed-notification">
+        <span>Màn hình chat quá nhỏ? Bấm vào nút phóng to ở góc trên bên phải để mở rộng cửa sổ chat!</span>
+        <button id="closeNotificationBtn" class="close-notification-btn">&times;</button>
+      </div>
+
       <div class="chatbot-container">
+        <a href="https://cloud.dify.ai/explore/installed/7898f6ba-9919-4a99-a0cf-ba57d5f48b3a" class="expand-button" target="_blank" title="Mở rộng" id="expandBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 3h6v6"></path>
+            <path d="M10 14L21 3"></path>
+            <path d="M9 21H3v-6"></path>
+            <path d="M14 10L3 21"></path>
+          </svg>
+        </a>
+
         <iframe 
           id="chatbotFrame"
           class="chatbot-frame"
@@ -1236,8 +1348,6 @@
       </iframe>
     </div>
   </div>
-
-
 
   <!-- FOOTER -->
   <footer>
@@ -1283,7 +1393,7 @@
             <div class="emoji-icon">📚</div>
             Cách sử dụng Gia sư Toán
           </div>
-          
+
           <div class="help-menu-item" data-topic="adding-images">
             <div class="emoji-icon">🖼️</div>
             Cách thêm hình ảnh vào AI
@@ -1305,6 +1415,25 @@
   </div>
 
   <script>
+    // Xử lý đóng thông báo phóng to
+    document.addEventListener("DOMContentLoaded", function() {
+      const notification = document.getElementById('chatExpandNotification');
+      const closeBtn = document.getElementById('closeNotificationBtn');
+      
+      // Kiểm tra xem thông báo đã được đóng trước đó chưa
+      if (localStorage.getItem('expandNotificationClosed') === 'true') {
+        if (notification) notification.style.display = 'none';
+      }
+      
+      // Xử lý đóng thông báo
+      if (closeBtn && notification) {
+        closeBtn.addEventListener('click', function() {
+          notification.style.display = 'none';
+          localStorage.setItem('expandNotificationClosed', 'true');
+        });
+      }
+    });
+    
     // Function to toggle collapsible content open on initial load
     window.onload = function() {
       const collapsibleTitle = document.querySelector('.collapsible-title');
@@ -1342,7 +1471,6 @@
       }
     }
 
-    // Tutor mapping để chuyển đổi nội dung khi chọn các môn học (Toán, Anh, Văn)
     // Function to handle collapsible sections
     function setupCollapsible() {
       const collapsibles = document.querySelectorAll('.collapsible-title');
@@ -1398,6 +1526,16 @@
         }
       };
 
+      // Map liên kết phóng to cho từng loại chatbot
+      const expandLinks = {
+        math: 'https://cloud.dify.ai/explore/installed/7898f6ba-9919-4a99-a0cf-ba57d5f48b3a',
+        literature: 'https://cloud.dify.ai/explore/installed/c93a8507-2617-4236-81fd-535f5d3fe7d0',
+        english: 'https://cloud.dify.ai/explore/installed/aea83af6-00f8-41b1-b0b4-af7b6857f966'
+      };
+
+      // Lấy nút phóng to
+      const expandBtn = document.getElementById('expandBtn');
+
       menuItems.forEach(item => {
         item.addEventListener('click', function() {
           menuItems.forEach(i => i.classList.remove('active'));
@@ -1416,6 +1554,11 @@
             `;
             setupCollapsible();
             chatbotFrame.src = selectedTutor.iframe;
+
+            // Cập nhật liên kết cho nút phóng to
+            if (expandBtn && expandLinks[tutor]) {
+              expandBtn.href = expandLinks[tutor];
+            }
           }
         });
       });
@@ -1490,7 +1633,7 @@ Gia sư Ảo là nền tảng học trực tuyến chuyên biệt về toán h�
 Gmail: <a href="mailto:legiahuyltv@gmail.com">legiahuyltv@gmail.com</a>`,
         "Trợ giúp": `<strong>Trợ giúp</strong><br>`,
         "Chính sách riêng tư": `<strong>Chính sách riêng tư</strong><br>
-Chúng tôi tôn trọng và bảo vệ quyền riêng tư của người dùng. Thông tin cá nhân của bạn được bảo mật và chỉ được sử dụng để cải thiện trải nghiệm học tập. Chúng tôi không chia sẻ dữ liệu cá nhân với bên thứ ba khi chưa có sự đồng ý. Mọi dữ liệu học tập và tiến trình của bạn được lưu trữ an toàn và chỉ bạn cùng giáo viên hướng dẫn mới có quyền truy cập.`,
+Chúng tôi tôn trọng và bảo vệ quyền riêng tưcủa người dùng. Thông tin cá nhân của bạn được bảo mật và chỉ được sử dụng để cải thiện trải nghiệm học tập. Chúng tôi không chia sẻ dữ liệu cá nhân với bên thứ ba khi chưa có sự đồng ý. Mọi dữ liệu học tập và tiến trình của bạn được lưu trữ an toàn và chỉ bạn cùng giáo viên hướng dẫn mới có quyền truy cập.`,
         "Điều khoản sử dụng": `<strong>Điều khoản sử dụng</strong><br>
 1. Chấp nhận điều khoản<br>
 Bằng việc truy cập và sử dụng chatbot Gia sư Toán ("Chatbot"), bạn đồng ý tuân thủ và bị ràng buộc bởi tất cả các điều khoản và điều kiện được nêu trong văn bản này. Nếu bạn không đồng ý với bất kỳ phần nào của các điều khoản này, vui lòng không sử dụng Chatbot.<br>
@@ -1594,7 +1737,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
           <p><strong>Bước 3:</strong> Chọn hình ảnh từ thiết bị của bạn.</p>
           <p><strong>Bước 4:</strong> Kèm theo một mô tả ngắn về nội dung hình ảnh và câu hỏi của bạn.</p>
           <p><strong>Bước 5:</strong> Nhấn gửi và đợi AI phân tích hình ảnh.</p>
-          
+
           <h3>Lưu ý khi gửi hình ảnh:</h3>
           <ul>
             <li>Hình ảnh phải rõ nét, không bị mờ hoặc quá tối</li>
@@ -1607,15 +1750,19 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
       };
 
       // Đóng help modal
-      helpModalClose.addEventListener('click', function() {
-        helpModal.style.display = "none";
-      });
+      if (helpModalClose) {
+        helpModalClose.addEventListener('click', function() {
+          helpModal.style.display = "none";
+        });
+      }
 
       // Đóng topic modal
-      topicModalClose.addEventListener('click', function() {
-        topicModal.style.display = "none";
-        helpModal.style.display = "block"; // Hiển thị lại help modal
-      });
+      if (topicModalClose) {
+        topicModalClose.addEventListener('click', function() {
+          topicModal.style.display = "none";
+          helpModal.style.display = "block"; // Hiển thị lại help modal
+        });
+      }
 
       // Xử lý click bên ngoài để đóng modal
       window.addEventListener('click', function(e) {
