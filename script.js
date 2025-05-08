@@ -179,3 +179,30 @@ function switchTutor(tutorType) {
     tutorType: tutorType
   });
 }
+
+const tutorMapping = {
+      math: {
+        title: 'Gia sư Toán',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng chất lượng cao, hướng dẫn giải bài tập chi tiết, cùng những mẹo học tập toán học hiệu quả từ các chuyên gia hàng đầu.',
+        iframe: 'https://udify.app/chatbot/M1dEP0lGehU2sX7e',
+        expandLink: 'https://udify.app/chat/M1dEP0lGehU2sX7e'
+      },
+      physics: {
+        title: 'Gia sư Vật Lý',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Vật Lý</strong>. Tại đây, bạn sẽ được khám phá thế giới vật lý thông qua các bài giảng chất lượng, từ cơ học, nhiệt học đến điện từ học. Trợ lý AI sẽ giúp bạn hiểu sâu về các định luật vật lý và ứng dụng thực tiễn của chúng trong cuộc sống.',
+        iframe: 'https://udify.app/chatbot/Tb3W1WLlGUm2jvIH',
+        expandLink: 'https://udify.app/chat/Tb3W1WLlGUm2jvIH'
+      },
+      english: {
+        title: 'Gia sư Anh',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Anh</strong>. Tại đây, bạn có thể học tiếng Anh qua các bài giảng và tương tác với trợ lý AI.',
+        iframe: 'https://udify.app/chatbot/OLxmx5Fm8v6rTAXo',
+        expandLink: 'https://udify.app/chat/OLxmx5Fm8v6rTAXo'
+      },
+      literature: {
+        title: 'Gia sư Văn',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Văn</strong>. Đây là nơi chia sẻ kiến thức và các bài giảng về Ngữ Văn.',
+        iframe: 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7',
+        expandLink: 'https://udify.app/chat/6UaZkt1RQQHDqfJ7'
+      }
+};

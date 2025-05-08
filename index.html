@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -972,7 +971,7 @@
       margin: 10% auto;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.2);
       text-align: center;      max-width: 400px;
     }
 
@@ -1141,14 +1140,14 @@
       height: 16px;
     }
   }
-  
+
   /* CSS cho thông báo phóng to */
   .expand-notification {
     position: relative;
     margin: 0 0 16px 0;
     animation: slideIn 0.5s ease-out, pulse 2s infinite;
   }
-  
+
   .notification-content {
     background: var(--primary-gradient);
     color: white;
@@ -1161,7 +1160,7 @@
     position: relative;
     overflow: hidden;
   }
-  
+
   .notification-content::before {
     content: "";
     position: absolute;
@@ -1172,7 +1171,7 @@
     background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 80%);
     z-index: 0;
   }
-  
+
   .notification-icon {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
@@ -1183,13 +1182,13 @@
     justify-content: center;
     z-index: 1;
   }
-  
+
   .notification-text {
     flex: 1;
     font-weight: 500;
     z-index: 1;
   }
-  
+
   .close-notification-btn {
     background: rgba(255, 255, 255, 0.2);
     border: none;
@@ -1205,12 +1204,12 @@
     transition: all 0.3s;
     z-index: 1;
   }
-  
+
   .close-notification-btn:hover {
     background: rgba(255, 255, 255, 0.4);
     transform: rotate(90deg);
   }
-  
+
   @keyframes slideIn {
     from {
       opacity: 0;
@@ -1221,7 +1220,7 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes pulse {
     0%, 100% {
       box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
@@ -1230,21 +1229,21 @@
       box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
     }
   }
-  
+
   @media (max-width: 768px) {
     .expand-notification {
       margin: 0 0 12px 0;
     }
-    
+
     .notification-content {
       padding: 10px 14px;
     }
-    
+
     .notification-icon {
       width: 30px;
       height: 30px;
     }
-    
+
     .notification-text {
       font-size: 14px;
     }
@@ -1269,7 +1268,7 @@
     justify-content: space-between;
     animation: pulse 2s infinite;
   }
-  
+
   .close-notification-btn {
     background: rgba(255, 255, 255, 0.2);
     border: none;
@@ -1285,7 +1284,7 @@
     margin-left: 10px;
     transition: all 0.2s;
   }
-  
+
   .close-notification-btn:hover {
     background: rgba(255, 255, 255, 0.4);
     transform: scale(1.1);
@@ -1346,6 +1345,10 @@
         <div class="emoji-icon">📐</div>
         Gia sư Toán
       </li>
+      <li class="sidebar-menu-item" data-tutor="physics" onclick="switchTutor('physics')">
+        <div class="emoji-icon">⚡</div>
+        Gia sư Vật Lý
+      </li>
       <li class="sidebar-menu-item" data-tutor="english" onclick="switchTutor('english')">
         <div class="emoji-icon">🇬🇧</div>
         Gia sư Anh
@@ -1397,15 +1400,15 @@
   <div class="content-container">
     <main>
       <div class="welcome-section" id="welcomeSection">
-        <h2 class="collapsible-title" onclick="toggleCollapsible(this)">Gia sư Toán</h2>
+        <h2 class="collapsible-title" onclick="toggleCollapsible(this)">Gia sư Vật Lý</h2>
         <div class="collapsible-content show">
           <p>
-            Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể nhận sự trợ giúp của AI ' Gia sư toán'. Gia sư toán sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.
+            Chào mừng bạn đến với <strong>Gia sư Vật Lý</strong>. Tại đây, bạn sẽ được khám phá thế giới vật lý thông qua các bài giảng chất lượng, từ cơ học, nhiệt học đến điện từ học. Trợ lý AI sẽ giúp bạn hiểu sâu về các định luật vật lý và ứng dụng thực tiễn của chúng trong cuộc sống.
           </p>
           <p>
-            Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học phức tạp. Trợ lý của chúng tôi có thể hỗ trợ từ toán cơ bản đến nâng cao.
+            Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm vật lý phức tạp. Trợ lý của chúng tôi có thể hỗ trợ từ vật lý cơ bản đến nâng cao.
           </p>
-          <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>
+          <p><strong>Lời khuyên:</strong> Kết hợp lý thuyết với thực hành để hiểu sâu hơn về vật lý!</p>
         </div>
       </div>
 
@@ -1413,7 +1416,7 @@
       <div id="expandNotification" style="position: relative; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; padding: 16px 24px; border-radius: 8px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 6px 20px rgba(79, 70, 229, 0.25); overflow: hidden; animation: slideIn 0.5s ease-out forwards; backdrop-filter: blur(5px);">
         <!-- Hiệu ứng ánh sáng mờ ở góc -->
         <div style="position: absolute; top: -10px; right: -10px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); filter: blur(20px); border-radius: 50%;"></div>
-        
+
         <div style="display: flex; align-items: center; gap: 12px; position: relative; z-index: 2; flex: 1;">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="min-width: 22px;">
             <path d="M15 3h6v6"></path>
@@ -1431,14 +1434,14 @@
             <div style="font-weight: 400; font-size: 0.95rem; opacity: 0.9; margin-top: 3px;">Màn hình chat quá nhỏ? Bấm vào nút phóng to ở góc trên bên phải!</div>
           </div>
         </div>
-        
+
         <button onclick="this.parentElement.style.display='none'; localStorage.setItem('expandNotificationClosed', 'true');" style="background: transparent; border: none; color: white; padding: 8px; cursor: pointer; margin-left: 12px; transition: all 0.2s ease; outline: none; display: flex; align-items: center; justify-content: center; position: relative; z-index: 2;">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
-        
+
         <style>
           @keyframes slideIn {
             from { opacity: 0; transform: translateY(-10px); }
@@ -1460,7 +1463,7 @@
         <iframe 
           id="chatbotFrame"
           class="chatbot-frame"
-          src="https://udify.app/chatbot/M1dEP0lGehU2sX7e"
+          src="https://udify.app/chatbot/Tb3W1WLlGUm2jvIH"
           allow="microphone"
           scrolling="yes"
           loading="lazy">
@@ -1599,6 +1602,12 @@
         description: 'Chào mừng bạn đến với <strong>Gia sư Văn</strong>. Đây là nơi chia sẻ kiến thức và các bài giảng về Ngữ Văn.',
         iframe: 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7',
         expandLink: 'https://udify.app/chat/6UaZkt1RQQHDqfJ7'
+      },
+      physics: {
+        title: 'Gia sư Vật Lý',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Vật Lý</strong>. Khám phá thế giới vật lý với AI của chúng tôi. Học hỏi các định luật, hiện tượng vật lý, và cách giải bài tập hiệu quả.',
+        iframe: 'https://udify.app/chatbot/Tb3W1WLlGUm2jvIH', // Thay thế bằng link chatbot Vật lý thực tế
+        expandLink: 'https://udify.app/chatbot/Tb3W1WLlGUm2jvIH' // Thay thế bằng link chat Vật lý thực tế
       }
     };
 
@@ -1685,7 +1694,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
           overlay.classList.remove('active');
         }
       }
-      
+
       // Đóng sidebar menu trên mobile nếu đang mở
       if (window.innerWidth < 1200) {
         const sidebarLeft = document.getElementById('sidebarLeft');
@@ -1714,7 +1723,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
       });
 
       const selectedTutor = tutorMapping[tutorType];
-      
+
       if (selectedTutor) {
         // Update welcome section
         const welcomeSection = document.getElementById('welcomeSection');
@@ -1725,18 +1734,18 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
             <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>
           </div>
         `;
-        
+
         // Update chatbot iframe
         const chatbotFrame = document.getElementById('chatbotFrame');
         chatbotFrame.src = selectedTutor.iframe;
-        
+
         // Update expand button link
         const expandBtn = document.getElementById('expandBtn');
         if (expandBtn) {
           expandBtn.href = selectedTutor.expandLink;
         }
       }
-      
+
       // Close sidebar on mobile
       if (window.innerWidth < 1200) {
         toggleLeftSidebar();
@@ -1767,7 +1776,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
         const notification = document.getElementById('chatExpandNotification');
         if (notification) notification.style.display = 'none';
       }
-      
+
       // Đảm bảo nút đóng hoạt động đúng
       const closeBtn = document.getElementById('closeNotificationBtn');
       if (closeBtn) {
@@ -1779,7 +1788,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
     function showHelpModal() {
       const helpModal = document.getElementById('helpModal');
       if (helpModal) helpModal.style.display = 'block';
-      
+
       // Close sidebar on mobile
       if (window.innerWidth < 1200) {
         toggleLeftSidebar();
@@ -1796,7 +1805,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
       const topicModal = document.getElementById('topicModal');
       const topicContent = document.getElementById('topicContent');
       const helpModal = document.getElementById('helpModal');
-      
+
       if (topicModal && topicContent) {
         topicContent.innerHTML = topicContents[topicId] || 'Nội dung đang được cập nhật...';
         helpModal.style.display = 'none';
@@ -1807,7 +1816,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
     function closeTopicModal() {
       const topicModal = document.getElementById('topicModal');
       const helpModal = document.getElementById('helpModal');
-      
+
       if (topicModal) topicModal.style.display = 'none';
       if (helpModal) helpModal.style.display = 'block';
     }
@@ -1816,7 +1825,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
     function showFooterModal(key) {
       const footerModal = document.getElementById('footerModal');
       const modalText = document.getElementById('modalText');
-      
+
       if (footerModal && modalText) {
         const content = modalContentMapping[key] || "Nội dung không khả dụng.";
         modalText.innerHTML = content;
@@ -1834,7 +1843,7 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
       const footerModal = document.getElementById('footerModal');
       const helpModal = document.getElementById('helpModal');
       const topicModal = document.getElementById('topicModal');
-      
+
       if (event.target == footerModal) {
         footerModal.style.display = 'none';
       }
