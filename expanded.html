@@ -14,147 +14,6 @@
       flex-direction: column;
     }
 
-    .back-button {
-      padding: 0.8rem;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.15);
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(5px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-    }
-
-    .back-button:hover {
-      background: rgba(255,255,255,0.25);
-      transform: translateX(-5px);
-    }
-
-    .back-button svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    .tutor-menu {
-      background: #4338ca;
-      padding: 1rem;
-      display: none;
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      width: 280px;
-      z-index: 1000;
-      flex-direction: column;
-      border-radius: 16px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      gap: 0.8rem;
-    }
-
-    .menu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-
-    .close-menu-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: white;
-      padding: 0.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .close-menu-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: rotate(90deg);
-    }
-
-    .close-menu-btn svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .menu-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .tutor-menu.menu-active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .tutor-menu::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-      pointer-events: none;
-    }
-
-    .tutor-button {
-      background: #4338ca !important;
-      color: white !important;
-      border: none !important;
-      padding: 1rem !important;
-      border-radius: 15px !important;
-      font-size: 1rem !important;
-      font-weight: 500 !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 12px !important;
-      box-shadow: 0 2px 10px rgba(67, 56, 202, 0.2) !important;
-    }
-
-    .tutor-button.active {
-      background: #312e81 !important;
-      box-shadow: 0 4px 15px rgba(49, 46, 129, 0.4) !important;
-    }
-
-    .tutor-button svg {
-      width: 22px !important;
-      height: 22px !important;
-      transition: transform 0.3s ease !important;
-    }
-
-    .tutor-button:hover svg {
-      transform: scale(1.1) !important;
-    }
-
-    .back-button {
-      background: #3b82f6 !important;
-      color: white !important;
-      box-shadow: 0 2px 10px rgba(59, 130, 246, 0.2) !important;
-    }
-
-    .back-button:hover {
-      background: #2563eb !important;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3) !important;
-    }
-
-    .menu-active {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
     .menu-toggle {
       position: fixed;
       top: 15px;
@@ -175,52 +34,148 @@
       background: rgba(59, 130, 246, 1);
     }
 
-    .tutor-button {
-      padding: 12px 20px;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      transition: all 0.3s ease;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.2);
+    .tutor-menu {
+      background: linear-gradient(145deg, #4338ca, #3730a3);
+      padding: 1.2rem;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      width: 300px;
+      z-index: 100;
+      flex-direction: column;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: none;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .tutor-button:hover {
-      background: rgba(59, 130, 246, 0.15);
-      transform: translateX(5px);
+    .tutor-menu.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      display: block;
     }
 
-    .tutor-button.active {
-      background: #3b82f6;
-      color: white;
+    .sidebar-menu {
+      list-style: none;
+      margin: 10px 0;
+      padding: 0;
     }
 
-    .menu-toggle:hover {
-      background: rgba(59, 130, 246, 1);
-    }
-
-    .menu-active {
+    .sidebar-menu-item {
+      padding: 14px 18px;
       display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      color: white;
+      transition: all 0.3s;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .tutor-button {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 8px;
-      background: #312e81;
+    .sidebar-menu-item:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .emoji-icon {
+      font-size: 20px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .back-button {
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.15);
       color: white;
       cursor: pointer;
-      font-size: 0.9rem;
-      box-shadow: 0 2px 10px rgba(67, 56, 202, 0.2);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(5px);
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    .tutor-button svg {
+    .back-button-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-button svg {
       width: 20px;
       height: 20px;
+      transition: transform 0.3s ease;
     }
 
-    .tutor-button.active {
-      background: #312e81;
-      box-shadow: 0 4px 12px rgba(49, 46, 129, 0.3);
+    .back-text {
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .back-button:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateX(-5px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .back-button:hover svg {
+      transform: translateX(-3px);
+    }
+
+    @media (max-width: 768px) {
+      .back-button {
+        padding: 6px 12px;
+      }
+      
+      .back-button svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .back-text {
+        font-size: 13px;
+      }
+    }
+
+    .close-menu-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
     }
 
     .chatbot-container {
@@ -234,43 +189,16 @@
       border: none;
     }
 
-    .menu-toggle {
-      position: fixed;
-      top: 0;
-      left: 0;
-      padding: 0.8rem;
-      background: rgba(255,255,255,0.15);
-      border: none;
-      border-radius: 12px;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s;
-      z-index: 101; /* Above the menu */
-    }
-
-    .menu-toggle svg {
-      width: 24px;
-      height: 24px;
-    }
-    
     @media (max-width: 768px) {
       .tutor-menu {
         padding: 0.6rem;
       }
 
-      .tutor-button {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-      }
-
-      .tutor-button svg {
-        width: 16px;
-        height: 16px;
-      }
       .menu-toggle {
         padding: 0.6rem;
       }
-       .menu-toggle svg {
+
+      .menu-toggle svg {
         width: 18px;
         height: 18px;
       }
@@ -283,85 +211,74 @@
       <path d="M3 12h18M3 6h18M3 18h18"/>
     </svg>
   </button>
+
   <div class="tutor-menu">
     <div class="menu-header">
       <a href="index.html" class="back-button" title="Quay lại phiên bản thu gọn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M19 12H5M12 19l-7-7 7-7"/>
-        </svg>
+        <div class="back-button-content">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span class="back-text">Quay lại</span>
+        </div>
       </a>
-      <button class="close-menu-btn" onclick="toggleMenu()" title="Đóng menu">
+      <button class="close-menu-btn" title="Đóng menu" onclick="toggleMenu()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
     </div>
-    <div class="menu-buttons">
-      <button class="tutor-button active" onclick="switchTutor('math')">Toán</button>
-      <button class="tutor-button" onclick="switchTutor('english')">Anh</button>
-      <button class="tutor-button" onclick="switchTutor('literature')">Văn</button>
-    </div>
-  </div>
-
-  <div class="tutor-menu">
-    <a href="index.html" class="back-button" title="Quay lại phiên bản thu gọn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M19 12H5M12 19l-7-7 7-7"/>
-      </svg>
-    </a>
-    <button class="tutor-button active" onclick="switchTutor('math')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M23 4v16H7"/>
-        <path d="M13 8l4 4-4 4"/>
-        <circle cx="5" cy="12" r="2"/>
-      </svg>
-      Gia sư Toán
-    </button>
-    <button class="tutor-button" onclick="switchTutor('english')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M4 7h16"/>
-        <path d="M4 12h16"/>
-        <path d="M4 17h7"/>
-      </svg>
-      Gia sư Anh
-    </button>
-    <button class="tutor-button" onclick="switchTutor('literature')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 3v15"/>
-        <path d="M8 8h8"/>
-        <path d="M8 12h8"/>
-        <path d="M8 16h8"/>
-      </svg>
-      Gia sư Văn
-    </button>
+    <ul class="sidebar-menu">
+      <li class="sidebar-menu-item" onclick="switchTutor('math')">
+        <div class="emoji-icon">📐</div>
+        Gia sư Toán
+      </li>
+      <li class="sidebar-menu-item" onclick="switchTutor('physics')">
+        <div class="emoji-icon">⚡</div>
+        Gia sư Vật Lý
+      </li>
+      <li class="sidebar-menu-item" onclick="switchTutor('english')">
+        <div class="emoji-icon">🇬🇧</div>
+        Gia sư Anh
+      </li>
+      <li class="sidebar-menu-item" onclick="switchTutor('literature')">
+        <div class="emoji-icon">📖</div>
+        Gia sư Văn
+      </li>
+    </ul>
   </div>
 
   <div class="chatbot-container">
-    <iframe id="chatbotFrame" class="chatbot-frame" src="https://udify.app/chat/M1dEP0lGehU2sX7e"></iframe>
+    <iframe id="chatbotFrame" class="chatbot-frame" src="https://udify.app/chatbot/Tb3W1WLlGUm2jvIH"></iframe>
   </div>
 
   <script>
-    const tutorURLs = {
-      math: 'https://udify.app/chat/M1dEP0lGehU2sX7e',
-      english: 'https://udify.app/chat/OLxmx5Fm8v6rTAXo',
-      literature: 'https://udify.app/chat/6UaZkt1RQQHDqfJ7'
-    };
-
-    function switchTutor(type) {
-      // Cập nhật trạng thái active của buttons
-      document.querySelectorAll('.tutor-button').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      document.querySelector(`[onclick="switchTutor('${type}')"]`).classList.add('active');
-
-      // Thay đổi URL của iframe
-      document.getElementById('chatbotFrame').src = tutorURLs[type];
-    }
-
     function toggleMenu() {
       const menu = document.querySelector('.tutor-menu');
-      menu.classList.toggle('menu-active');
+      menu.classList.toggle('active');
+    }
+
+    // Đóng menu khi click bên ngoài
+    document.addEventListener('click', function(e) {
+      const menu = document.querySelector('.tutor-menu');
+      const menuToggle = document.querySelector('.menu-toggle');
+      if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
+        menu.classList.remove('active');
+      }
+    });
+
+    const tutorURLs = {
+      math: 'https://udify.app/chatbot/M1dEP0lGehU2sX7e',
+      english: 'https://udify.app/chatbot/OLxmx5Fm8v6rTAXo',
+      literature: 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7',
+      physics: 'https://udify.app/chatbot/Tb3W1WLlGUm2jvIH'
+    };
+
+    function switchTutor(subject) {
+      const frame = document.getElementById('chatbotFrame');
+      frame.src = tutorURLs[subject];
+      toggleMenu();
     }
   </script>
 </body>

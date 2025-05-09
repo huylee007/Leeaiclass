@@ -32,6 +32,11 @@ header {
   justify-content: space-between;
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
 .logo-container h1 {
   font-size: 1.8rem;
   font-weight: 600;
