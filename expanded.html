@@ -250,7 +250,7 @@
   </div>
 
   <div class="chatbot-container">
-    <iframe id="chatbotFrame" class="chatbot-frame" src="https://udify.app/chatbot/Tb3W1WLlGUm2jvIH"></iframe>
+    <iframe id="chatbotFrame" class="chatbot-frame"></iframe>
   </div>
 
   <script>
@@ -278,8 +278,16 @@
     function switchTutor(subject) {
       const frame = document.getElementById('chatbotFrame');
       frame.src = tutorURLs[subject];
+      localStorage.setItem('lastChatbotURL', tutorURLs[subject]);
       toggleMenu();
     }
+
+    // Khôi phục URL cuối cùng hoặc sử dụng URL mặc định
+    window.onload = function() {
+      const frame = document.getElementById('chatbotFrame');
+      const lastURL = localStorage.getItem('lastChatbotURL');
+      frame.src = lastURL || 'https://udify.app/chatbot/Tb3W1WLlGUm2jvIH';
+    };
   </script>
 </body>
 </html>
