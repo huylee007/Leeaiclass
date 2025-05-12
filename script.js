@@ -183,9 +183,7 @@ function switchTutor(tutorType) {
 const tutorMapping = {
       math: {
         title: 'Gia sư Toán',
-        description: 'Chào mừng bạn đến với <strong style="color: #3b82f6;">Gia sư Toán</strong>. Đây là nơi bạn có thể nhận sự trợ giúp của AI gia sư toán. <strong style="color: #3b82f6;">Gia sư Toán</strong> sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.</p>
-          <p>Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học phức tạp. Trợ lý của chúng tôi có thể hỗ trợ từ toán cơ bản đến nâng cao.</p>
-          <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>',
+        description: 'Chào mừng bạn đến với Gia sư Toán . Đây là nơi bạn có thể nhận sự trợ giúp của AI gia sư toán. Gia sư toán sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.',
         iframe: 'https://udify.app/chatbot/M1dEP0lGehU2sX7e',
         expandLink: 'https://udify.app/chat/M1dEP0lGehU2sX7e'
       },
