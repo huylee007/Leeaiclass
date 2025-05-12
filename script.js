@@ -183,15 +183,17 @@ function switchTutor(tutorType) {
 const tutorMapping = {
       math: {
         title: 'Gia sư Toán',
-        description: 'Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng chất lượng cao, hướng dẫn giải bài tập chi tiết, cùng những mẹo học tập toán học hiệu quả từ các chuyên gia hàng đầu.',
+        description: 'Chào mừng bạn đến với <strong style="color: #3b82f6;">Gia sư Toán</strong>. Đây là nơi bạn có thể nhận sự trợ giúp của AI gia sư toán. <strong style="color: #3b82f6;">Gia sư Toán</strong> sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.</p>
+          <p>Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học phức tạp. Trợ lý của chúng tôi có thể hỗ trợ từ toán cơ bản đến nâng cao.</p>
+          <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>',
         iframe: 'https://udify.app/chatbot/M1dEP0lGehU2sX7e',
         expandLink: 'https://udify.app/chat/M1dEP0lGehU2sX7e'
       },
       physics: {
         title: 'Gia sư Vật Lý',
         description: 'Chào mừng bạn đến với <strong>Gia sư Vật Lý</strong>. Tại đây, bạn sẽ được khám phá thế giới vật lý thông qua các bài giảng chất lượng, từ cơ học, nhiệt học đến điện từ học. Trợ lý AI sẽ giúp bạn hiểu sâu về các định luật vật lý và ứng dụng thực tiễn của chúng trong cuộc sống.',
-        iframe: 'https://udify.app/chatbot/Tb3W1WLlGUm2jvIH',
-        expandLink: 'https://udify.app/chat/Tb3W1WLlGUm2jvIH'
+        iframe: 'https://udify.app/chatbot/uVYHltm1bdXM9Xmr',
+        expandLink: 'https://udify.app/chat/uVYHltm1bdXM9Xmr'
       },
       english: {
         title: 'Gia sư Anh',
