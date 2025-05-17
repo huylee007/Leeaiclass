@@ -2,7 +2,6 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="./attached_assets/Lee AI Class.png">
   <script src="logger.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nền tảng Gia sư</title>
@@ -972,7 +971,8 @@
       margin: 10% auto;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0px 0px10px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 0px 10px rgba(0, 0, ```
+0, 0.2);
       text-align: center;      max-width: 400px;
     }
 
@@ -1331,7 +1331,7 @@
     </div>
 
     <div class="logo-container">
-      <h1>Lee AI Class<div class="subtitle">Học mọi lúc, mọi nơi</div></h1>
+      <h1>Nền tảng Gia sư<div class="subtitle">Học mọi lúc, mọi nơi</div></h1>
     </div>
   </header>
 
@@ -1403,8 +1403,12 @@
       <div class="welcome-section" id="welcomeSection">
         <h2 class="collapsible-title" onclick="toggleCollapsible(this)">Gia sư Toán</h2>
         <div class="collapsible-content show">
-          <p>Chào mừng bạn đến với <strong style="color: #3b82f6;">Gia sư Toán</strong>. Đây là nơi bạn có thể nhận sự trợ giúp của AI gia sư toán. <strong style="color: #3b82f6;">Gia sư Toán</strong> sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.</p>
-          <p>Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học phức tạp. Trợ lý của chúng tôi có thể hỗ trợ từ toán cơ bản đến nâng cao.</p>
+          <p>
+            Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể nhận sự trợ giúp của AI ' Gia sư toán'. Gia sư toán sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.
+          </p>
+          <p>
+            Hãy sử dụng trợ lý AI bên dưới để được hỗ trợ giải bài tập và hiểu sâu hơn về các khái niệm toán học phức tạp. Trợ lý của chúng tôi có thể hỗ trợ từ toán cơ bản đến nâng cao.
+          </p>
           <p><strong>Lời khuyên:</strong> Hãy làm bài tập đều đặn mỗi ngày!</p>
         </div>
       </div>
@@ -1584,9 +1588,15 @@
     const tutorMapping = {
       math: {
         title: 'Gia sư Toán',
-        description: 'Chào mừng bạn đến với Gia sư Toán . Đây là nơi bạn có thể nhận sự trợ giúp của AI gia sư toán. Gia sư toán sẽ hướng dẫn bạn giải bài tập chi tiết, rõ ràng, dễ hiểu, giúp bạn học toán hiệu quả.',
-        iframe: 'hhttps://udify.app/chatbot/M1dEP0lGehU2sX7e',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Toán</strong>. Đây là nơi bạn có thể tìm thấy các bài giảng chất lượng cao, hướng dẫn giải bài tập chi tiết, cùng những mẹo học tập toán học hiệu quả từ các chuyên gia hàng đầu.',
+        iframe: 'https://udify.app/chatbot/M1dEP0lGehU2sX7e',
         expandLink: 'https://udify.app/chat/M1dEP0lGehU2sX7e'
+      },
+      physics: {
+        title: 'Gia sư Vật Lý',
+        description: 'Chào mừng bạn đến với <strong>Gia sư Vật Lý</strong>. Khám phá thế giới vật lý với AI của chúng tôi. Học hỏi các định luật, hiện tượng vật lý, và cách giải bài tập hiệu quả.',
+        iframe: 'https://udify.app/chatbot/uVYHltm1bdXM9Xmr',
+        expandLink: 'expanded.html?id=uVYHltm1bdXM9Xmr'
       },
       english: {
         title: 'Gia sư Anh',
@@ -1597,14 +1607,8 @@
       literature: {
         title: 'Gia sư Văn',
         description: 'Chào mừng bạn đến với <strong>Gia sư Văn</strong>. Đây là nơi chia sẻ kiến thức và các bài giảng về Ngữ Văn.',
-        iframe: 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7',
+iframe: 'https://udify.app/chatbot/6UaZkt1RQQHDqfJ7',
         expandLink: 'https://udify.app/chat/6UaZkt1RQQHDqfJ7'
-      },
-      physics: {
-        title: 'Gia sư Vật Lý',
-        description: 'Chào mừng bạn đến với <strong>Gia sư Vật Lý</strong>. Khám phá thế giới vật lý với AI của chúng tôi. Học hỏi các định luật, hiện tượng vật lý, và cách giải bài tập hiệu quả.',
-        iframe: 'https://udify.app/chatbot/uVYHltm1bdXM9Xmr',
-        expandLink: 'https://udify.app/chat/uVYHltm1bdXM9Xmr'
       }
     };
 
@@ -1863,3 +1867,4 @@ Mọi phản hồi và đề xuất cải tiến đều được chúng tôi đ�
   </script>
 </body>
 </html>
+`
